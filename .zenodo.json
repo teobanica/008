@@ -1,0 +1,25 @@
+{
+  "title": "Maximal torus theory for crossed product quantum groups",
+  "description": "<p>For a discrete group acting by automorphisms on a compact connected Lie group, a single torus of the crossed product detects characters, amenability, and polynomial growth exactly when the action preserves a maximal torus of the compact factor. We give counterexamples to three earlier torus tests and formulate revised conjectures using the quantum center, quantum quotients, and cocycle twists.</p><p>The release includes the 30-page paper, its LaTeX source, and two Python scripts for the partition and cocycle computations. The manuscript byline is TB 2.0 and GPT 6.2.</p>",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [
+    {
+      "name": "TB 2.0",
+      "orcid": "0000-0003-4680-0364"
+    },
+    {
+      "name": "GPT 6.2"
+    }
+  ],
+  "keywords": [
+    "compact quantum groups",
+    "maximal tori",
+    "crossed products",
+    "bicrossed products",
+    "characters",
+    "amenability",
+    "polynomial growth",
+    "cocycle twists"
+  ]
+}
