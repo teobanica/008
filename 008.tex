@@ -1,0 +1,2296 @@
+\documentclass[11pt,a4paper]{article}
+% Print layout of 002: A4 portrait, 160 x 247 mm text area.
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,booktabs,enumitem,etoolbox}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=magenta,urlcolor=black]{hyperref}
+\urlstyle{same}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{question}[thm]{Question}
+\newtheorem{conjecture}[thm]{Conjecture}
+% The four kinds of introductory statements share one counter.
+\newtheorem{oldconj}{Old conjecture}
+\newtheorem{introprop}[oldconj]{Proposition}
+\newtheorem{introthm}[oldconj]{Theorem}
+\newtheorem{newconj}[oldconj]{New conjecture}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{comment}[thm]{Comment}
+\linespread{1.015}
+\setlength{\parskip}{0.5pt}\setlength{\emergencystretch}{2em}
+\setlist{itemsep=1pt,topsep=3pt,parsep=0pt}\raggedbottom
+\setcounter{tocdepth}{1}
+\newcommand{\topic}[1]{\par\addvspace{1.0\baselineskip}\noindent\textbf{#1.}\enspace\ignorespaces}
+\title{Maximal torus theory for crossed product quantum groups}
+\author{TB 2.0 and GPT 6.2}
+\date{}
+\makeatletter
+\hypersetup{pdfauthor={\@author},pdftitle={Maximal torus theory for crossed product quantum groups}}
+\makeatother
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give counterexamples to three proposed tests for characters,
+amenability and polynomial growth using the group-dual subgroups of a
+compact matrix quantum group. For an action on a compact connected Lie
+group, a single such subgroup detects all three properties exactly when
+the action preserves a maximal torus of the base. For a lattice
+bicrossed product whose compact factor has infinitely many components,
+failure of character detection is witnessed by a class function on that
+factor, and a torus of a quantum quotient detects exponential growth.
+These results suggest three conjectures. The character conjecture uses
+the quotient by the quantum center. The amenability and growth
+conjectures use tori of cocycle twists of quantum quotients.
+\end{abstract}
+
+\begingroup
+\color{magenta}\hypersetup{linkcolor=magenta}
+\setlength{\parskip}{0pt}
+\makeatletter
+\patchcmd{\l@section}{\addvspace{1.0em \@plus\p@}}{\addvspace{0pt}}{}{}
+\makeatother
+\tableofcontents
+\endgroup
+
+\section*{Introduction}
+\phantomsection\addcontentsline{toc}{section}{Introduction}
+We can read every character of a compact connected Lie group on one
+maximal torus, since every conjugacy class meets it. For $G\subset U_N^+$
+we use a family of tori. Throughout this paper $C(G)$ is the full
+$C^*$-algebra of $G$, and $C(G)_{central}$ is the norm-closed span of
+its irreducible characters. Making the fundamental matrix diagonal in
+the basis given by $Q\in U_N$ defines the torus $\widehat{\Gamma}_Q$
+and the restriction $\pi_Q:C(G)\to C^*(\Gamma_Q)$. We begin with
+the three conjectures of \cite{bp}.
+
+\begin{oldconj}[Characters]\label{oldchar}
+If $G$ is connected, then for each nonzero $x\in C(G)_{central}$ there is a
+$Q\in U_N$ such that $\pi_Q(x)\ne0$.
+\end{oldconj}
+
+For the half-classical orthogonal group $O_N^*$, restriction to the
+diagonal torus distinguishes representations \cite[Theorem~6.2]{halforth}.
+For half-liberations see \cite[Theorem~5.5]{bp}
+and \cite[Chapter~14]{qg}.
+
+\begin{oldconj}[Amenability]\label{oldamen}
+The discrete dual $\widehat G$ is amenable exactly when all the groups
+$\Gamma_Q$, $Q\in U_N$, are amenable.
+\end{oldconj}
+
+For $U_N^+$ with $N\ge2$ we need only the diagonal torus. Its group
+is $F_N$, so we can already read off nonamenability. For other free examples
+see \cite[Theorem~4.4]{bp} and \cite[Chapter~14]{qg}.
+
+\begin{oldconj}[Growth]\label{oldgrowth}
+Polynomial growth of $\Gamma_Q$ for every $Q\in U_N$ is equivalent to
+polynomial growth of $\widehat G$.
+\end{oldconj}
+
+The dual of $O_N^*$ has polynomial growth \cite[Section~9]{halforth}.
+For all three tests on the half-liberation $[H]$ of a connected
+conjugation-stable $H\subset U_N$, see \cite[Theorem~5.5]{bp} and the
+crossed product model in \cite{halfhopf}.
+
+We will prove in this paper that these 3 conjectures are all wrong.
+The first two counterexamples use an action of the tetrahedral group.
+For growth we use the quantum automorphism group of a five-dimensional algebra.
+
+\begin{introprop}[Characters]\label{counterchar}
+There is a connected crossed product $C(SO_5)\rtimes D$ of polynomial
+growth for which every torus kills the same nonzero virtual character,
+the discriminant of the defining representation of $SO_5$.
+\end{introprop}
+
+We let $D=\mathbb Z^3\rtimes\mathbb Z$ act through $A_4$. This action preserves no
+maximal torus of $SO_5$, so the discriminant vanishes on every torus
+of the crossed product
+(Theorem~\ref{sofive}).
+
+\begin{introprop}[Amenability]\label{counteramen}
+For the tetrahedral rotation action of $D=\mathbb Z^3\rtimes\mathbb Z$
+on $U_2^+$, the crossed product is connected and has nonamenable dual.
+Every toral group is a quotient of the virtually abelian group
+$\mathbb Z\times D$.
+\end{introprop}
+
+The rotations have no common axis, so the two diagonal weights coincide
+on every torus (Corollary~\ref{tetra}). If we pass to the quotient
+$U_2^+$, we recover its free diagonal torus.
+
+\begin{introprop}[Growth]\label{countergrowth}
+Let $G=G^+(\mathbb C\oplus M_2)$ be the quantum automorphism group
+for the canonical trace. Its dual grows exponentially, yet every toral group in every
+compact matrix quantum quotient of $G$ has at most linear growth.
+\end{introprop}
+
+Here every torus lies in $SO_3$, and there is no proper nontrivial
+quantum quotient (Theorem~\ref{five}). But we can twist by a cocycle
+to get $S_5^+$, where a pair and a triple of points give
+$\mathbb Z_2*\mathbb Z_3$.
+
+For characters we keep the tori of $G$ itself. If they miss an element
+of the character algebra, can we already see the failure on the compact
+factor? We say the tori \emph{jointly detect} an algebra when their
+restrictions have trivial common kernel there.
+
+\begin{introthm}[Characters]\label{introchar}
+In each of the following compact matrix cases, joint detection by the
+tori of $G$ is equivalent on the three algebras $C(G)_{central}$, $C(K)_{central}$
+and the pullback of $C(G/Z(G))_{central}$, where $Z(G)$ is the quantum center.
+\begin{enumerate}
+\item $G$ is an ordinary crossed product of a compact group $K$ by an
+amenable discrete group $D$.
+\item $G$ is a bicrossed product of $D=\mathbb Z^r$, $r\ge1$, and a
+compact group $K$ with infinitely many connected components.
+\end{enumerate}
+\end{introthm}
+
+For an ordinary action we need only ask whether each conjugacy class
+of $K$ meets an invariant abelian subgroup (Theorem~\ref{classcriterion}).
+We treat the lattice case in Theorem~\ref{bicrosscharacters} and pass to
+$G/Z(G)$ in Corollary~\ref{classicalneutral}.
+
+\begin{introthm}[Amenability]\label{introamen}
+Let $G$ be a compact matrix bicrossed product of a discrete group $D$
+and a compact group $K$. Its dual is amenable if and only if every
+toral group in every unitary dual $2$-cocycle twist of a compact matrix
+quantum quotient of $G$ is amenable. The torus $\widehat D\subset G$
+alone detects amenability.
+\end{introthm}
+
+We find this torus simply by evaluating at the identity of $K$.
+Coamenability of $G$ is equivalent to amenability of $D$
+\cite[Corollary~3.7]{fmp}. Proposition~\ref{twistnecessary} explains why
+all the other toral groups are amenable whenever $D$ is.
+
+\begin{introthm}[Growth]\label{introgrowth}
+Let $C(G)=C(L)\rtimes D$, with $D$ finitely generated. Take for
+$L$ a compact connected Lie group, $U_2^+$ with a rotation action, or
+$G^+(B)$ for the canonical trace on a finite-dimensional
+$C^*$-algebra $B$. In the first and third cases any action is allowed.
+Then $\widehat G$ has polynomial growth exactly when every toral group in
+every unitary dual $2$-cocycle twist of a compact matrix quantum quotient
+of $G$ has polynomial growth.
+\end{introthm}
+
+For a compact connected Lie base, one torus suffices for all three
+tests precisely when $D$ preserves a maximal torus of the base
+(Theorem~\ref{joint}). We prove both analytic tests for the
+three families and their cocycle twists in Theorem~\ref{twistclass}.
+
+We can now state our three conjectures. Theorem~\ref{introchar} gives
+us a way to ask the first without choosing a crossed product presentation.
+
+\begin{newconj}[Characters]\label{newchar}
+Let $G$ be a compact matrix quantum group of Kac type with quantum
+center $Z(G)$. If the tori of $G$ jointly detect the norm-closed
+character algebra $C(G/Z(G))_{central}$, then they jointly detect $C(G)_{central}$.
+Here characters of $G/Z(G)$ are pulled back to $G$ before restriction.
+\end{newconj}
+
+We prove this for amenable chain groups in Section~\ref{seccenter}.
+In Section~\ref{sectests} we treat orthogonal easy quantum groups and
+free products of free unitary quantum groups. The latter can have a
+nonamenable chain group.
+
+\begin{newconj}[Amenability]\label{newamen}
+Let $G$ be a compact matrix quantum group of Kac type. Its dual is
+amenable exactly when $\Lambda$ is amenable for every diagram
+\[
+ G\twoheadrightarrow H,\qquad H\sim K,\qquad \widehat\Lambda\subset K
+\]
+where $H$ is a compact matrix quantum quotient and $K$ is a unitary
+dual $2$-cocycle twist of $H$.
+\end{newconj}
+
+Theorem~\ref{introamen} gives us the bicrossed-product case. For the
+rotation actions on $U_2^+$, we can use the torus of the base quotient
+even when every toral group of $G$ is amenable
+(Section~\ref{secanalytic}).
+
+\begin{newconj}[Growth]\label{newgrowth}
+Let $G$ be a compact matrix quantum group of Kac type. Its dual has
+polynomial growth exactly when $\Lambda$ has polynomial growth for
+every diagram
+\[
+ G\twoheadrightarrow H,\qquad H\sim K,\qquad \widehat\Lambda\subset K
+\]
+where $H$ is a compact matrix quantum quotient and $K$ is a unitary
+dual $2$-cocycle twist of $H$.
+\end{newconj}
+
+Theorem~\ref{introgrowth} covers our three families of crossed products.
+For lattice bicrossed products with infinitely many components in the
+compact factor, we can even exhibit a lamplighter group inside a toral
+group of an untwisted quotient (Theorem~\ref{latticegrowth}).
+
+\section{Tori and crossed products}
+Let $v$ be a fundamental unitary corepresentation of a compact matrix
+quantum group $G$ of Kac type \cite{wcmp}.
+For a unitary matrix $Q$ of the same size as $v$, the quotient
+\[
+ C^*(\Gamma_Q)=C(G)\big/\big\langle (QvQ^*)_{ij}:i\ne j\big\rangle
+\]
+is a full group $C^*$-algebra. Its diagonal coefficients are group-like
+unitaries and generate $\Gamma_Q$. We call any group-dual subgroup a
+\emph{torus}. The groups $T_Q(G)=\widehat{\Gamma}_Q$ are the
+\emph{standard tori}, and their indexed family is the \emph{skeleton} of
+the given embedding \cite[Chapter~13]{qg}. Every torus of $G$ lies in
+one of its standard tori. On the discrete side this inclusion makes the
+toral group a quotient of $\Gamma_Q$. Indeed, a
+unitary corepresentation of a group dual splits into weight spaces
+indexed by group elements. An orthonormal basis of weight vectors
+therefore diagonalizes the restriction of $v$ \cite{bbd,bp}. By Tannaka--Krein reconstruction
+\cite{wtk}, the intertwiners between tensor words in $v$ and $\bar v$
+determine the relations on the diagonal generators in each basis
+\cite[Section~6]{bp}.
+
+Write $C(G)_{central}$ for the norm closure in $C(G)$ of the complex span of
+irreducible characters. Products correspond to tensor products and the
+involution corresponds to conjugation, so this span is a unital
+$*$-algebra. A virtual character is an integral linear combination of
+irreducible characters. For a family of tori with restriction maps
+$\pi_i$, joint detection of $C(G)_{central}$ means
+\[
+ C(G)_{central}\mathbin{\bigcap}\left(\bigcap_i\ker\pi_i\right)=\{0\}
+\]
+A single torus detects $C(G)_{central}$ if its restriction is injective, or
+equivalently isometric, there. Universal norms matter in this definition.
+For example the characters of $\widehat D$ are the elements of $D$,
+and $C(\widehat D)_{central}=C^*(D)$ even when $D$ is nonamenable.
+
+For a discrete quantum group $\widehat G$, amenability means that $G$ is
+coamenable. For growth choose a self-conjugate generating representation
+$v$ containing $1$ and use the volume
+\[
+ b_v(n)=\sum_{r\in v^{\otimes n}}(\dim r)^2
+\]
+where we count each irreducible summand of $v^{\otimes n}$ once. Tensor powers of any other
+such generator give comparable lengths. We say that a torus detects an
+analytic property if its discrete group has that property exactly when
+$\widehat G$ does. Connectedness of $G$ means that $G$ has no nontrivial
+finite quantum quotient.
+
+Let $D$ act by automorphisms $\alpha_d$ on a compact group $K$. In the
+ordinary crossed product the copy of $C(K)$ has its original coproduct,
+and the canonical unitaries $s_d$, $d\in D$, satisfy
+\[
+ s_ds_e=s_{de},\qquad s_df s_d^*=f\circ\alpha_{d^{-1}},\qquad
+ \Delta(s_d)=s_d\otimes s_d
+\]
+We always take the full crossed product, with its universal property for
+covariant representations. We assume compact matrix type. This holds for
+$K$ a compact Lie group and $D$ finitely generated, since the coefficients
+of a faithful representation of $K$ and finitely many $s_d$ generate.
+For a closed invariant abelian subgroup $A$ put
+\[
+ \Gamma_A=\widehat A\rtimes D,\qquad
+ (d\cdot\lambda)(a)=\lambda(\alpha_{d^{-1}}(a))
+\]
+A character $\lambda$ of $A$ is a unitary function, so the covariance
+relation is precisely the group relation defining $\Gamma_A$.
+
+\begin{lem}\label{abelian}
+Every torus of $G$ is contained in a torus dual to $\widehat A\rtimes D$,
+where $A$ is a closed $D$-invariant abelian subgroup of $K$. Every
+such $A$ gives a torus of $G$.
+\end{lem}
+\begin{proof}
+Restrict a Hopf quotient $C(G)\to C^*(\Lambda)$ to $C(K)$.
+Its image is $C(A)$ for a closed subgroup $A\subset K$, which is abelian
+because the image has cocommutative coproduct. Covariance makes the
+kernel of this restriction $D$-invariant. Thus the quotient factors
+through $C(A)\rtimes D=C^*(\widehat A\rtimes D)$. Conversely,
+equivariant restriction to $A$ gives this Hopf quotient.
+\end{proof}
+
+For a compact group $K$, $C(K)_{central}$ consists of the continuous
+functions on $K$ that are constant on conjugacy classes, by Peter--Weyl. The irreducible characters of the crossed product are $s_d\chi_u$
+with $d\in D$ and $u\in Irr(K)$ \cite[Theorem~6.1]{fmp}. In particular
+\[
+ C(G)_{central}=C^*(C(K)_{central},s_d\mid d\in D)\subset C(K)\rtimes D
+\]
+
+For $D$ trivial this gives the classical algebra of class functions. For
+abelian $K$ the coefficient algebra is $C^*(\widehat K\rtimes D)$ and
+$G$ is its own maximal torus. In between these cases the group unitaries
+belong to $C(G)_{central}$ and can act nontrivially on the class functions. Faithfulness on $C(G)_{central}$ therefore involves the norm of sums
+$\sum_d f_ds_d$ with class-function coefficients.
+
+We shall also use compact matrix quantum quotients $G\twoheadrightarrow H$.
+Write $\mathcal R_G$ for the algebra spanned by the matrix coefficients
+of finite-dimensional unitary representations of $G$. Pullback gives an
+inclusion $\mathcal R_H\subset\mathcal R_G$.
+Restriction to a quantum subgroup gives a surjection. Thus a torus of a quotient gives
+the pair of maps
+\[
+ \mathcal R_G\ \supset\ \mathcal R_H\
+                    \longrightarrow\ \mathbb C[\Lambda]
+\]
+We use these maps to compare the two discrete analytic properties.
+Character restrictions always use tori of $G$ itself. We shall also use
+the following fact. The image of a polynomial Hopf $*$-homomorphism
+into a group algebra is the span of a subgroup. Indeed, if $\sum_g c_g g$ is in the image, slicing
+its coproduct at $g$ puts each $c_g g$ in the image separately. The
+full completion of this subgroup algebra gives a torus of the source.
+
+\begin{defn}\label{quotients}
+The quotient test for amenability holds for $G$ if amenability of
+$\widehat G$ is equivalent to amenability of every $\Lambda$ in a diagram
+\[
+ G\twoheadrightarrow H\supset\widehat\Lambda
+\]
+with $H$ a compact matrix quantum quotient and $\Lambda$ finitely
+generated. The quotient test for growth uses polynomial growth on both
+sides of the equivalence.
+\end{defn}
+
+\section{Characters and invariant maximal tori}\label{secweyl}
+
+Throughout this section $K$ is a compact connected Lie group.
+All its maximal tori are conjugate. A maximal torus $T$ is invariant
+under $D$ when every $d\in D$ sends the subgroup $T$ onto itself.
+The action on $T$ may be nontrivial. The forward construction uses
+the Weyl group to recover the character norm. For the converse we
+construct one virtual character that vanishes on all the tori at once.
+
+\begin{thm}\label{weyl}
+For $C(G)=C(K)\rtimes D$ with $K$ a compact connected Lie group, the
+tori of $G$ detect its full character algebra if and only if $D$
+preserves a maximal torus $T$ of $K$. In that case restriction to
+$C(T)\rtimes D$ is isometric on the character algebra. If there is no
+invariant maximal torus, a nonzero virtual character of $K$ vanishes
+on every torus of $G$.
+\end{thm}
+\begin{proof}
+Suppose first that $D$ preserves $T$. Write $W=N_K(T)/T$.
+Restriction identifies $C(K)_{central}$ with $C(T)^W$ \cite{btd}. The
+identification is equivariant for $D$, which normalizes the action of
+$W$ on $T$.
+
+We check faithfulness in the universal norm. Start with a faithful
+representation of $C(G)$ on a Hilbert space $H$. Its class functions
+and group unitaries give a covariant pair $(\pi,V)$ for $C(T)^W$ and $D$.
+The Weyl average $E:C(T)\to C(T)^W$ is a $D$-equivariant conditional
+expectation. Complete $C(T)\otimes H$, after dividing by null vectors,
+in the following inner product, taken linear in its first variable.
+\[
+ \langle f\otimes\xi,h\otimes\eta\rangle
+     =\langle\pi(E(\bar h f))\xi,\eta\rangle
+\]
+Left multiplication by $C(T)$ and the operators
+$f\otimes\xi\mapsto (d\cdot f)\otimes V_d\xi$ form a covariant pair on
+this completion. On $1\otimes H$ the invariant functions and the group
+unitaries recover $(\pi,V)$, since for $b\in C(T)^W$ one has
+$b\otimes\xi=1\otimes\pi(b)\xi$. This realizes the original norm on
+$C(G)_{central}$ after restriction to $C(T)\rtimes D$.
+
+Conversely, fix a maximal torus $T$ of $K$ and a faithful unitary
+representation of $K$. Let $F$ be the set of its distinct weights on $T$.
+The product
+\[
+ P_T=\prod_{\{\lambda,\mu\}\subset F,\ \lambda\ne\mu}
+                      (\lambda-\mu)^2
+\]
+over unordered pairs belongs to $R(T)^W$, since $W$ permutes the weights.
+It is nonzero because $R(T)$ is a Laurent polynomial ring. The
+restriction isomorphism $R(K)\simeq R(T)^W$ gives a nonzero virtual
+character $P$ of $K$ \cite{btd}.
+
+If $P(t)\ne0$ at $t\in T$, the eigenspaces of $t$ in the chosen
+representation are precisely the weight spaces of $T$. Any element of
+$C_K(t)$ preserves these spaces, so it commutes with $T$, which acts
+by scalars on each. Faithfulness and $C_K(T)=T$ give $C_K(t)=T$.
+By conjugacy, $C_K(x)$ is a maximal torus for every $x\in K$ with
+$P(x)\ne0$.
+
+If a $D$-invariant abelian subgroup $A$ contains such an $x$, write
+$T_x=C_K(x)$. Then $A\subset T_x$ and
+$T_x\subset C_K(A)\subset C_K(x)=T_x$. Thus $C_K(A)$ is a
+$D$-invariant maximal torus. When no such torus exists, $P$ vanishes
+on every invariant $A$. By Lemma~\ref{abelian} it vanishes on every
+torus of $G$.
+\end{proof}
+
+\section{The connected center and the three detection properties}\label{secjoint}
+
+Suppose $C(G)=C(K)\rtimes D$ with $K$ compact matrix and $D$
+finitely generated.
+If $\widehat G$ has polynomial growth, then so do $\widehat K$ and $D$.
+The converse depends on the action. We first give a condition under which
+one can read off the growth from these two factors.
+
+If $V$ is the coefficient space of a generating
+self-conjugate corepresentation containing the trivial representation,
+then $\dim V^n$ is the volume of the ball of radius $n$ in $\widehat K$.
+Indeed, products of coefficients are coefficients of tensor products, and
+an irreducible of dimension $m$ contributes a coefficient space of
+dimension $m^2$. We can equally use any finite-dimensional, self-adjoint
+algebraically generating space in $\mathcal R_K$ containing $1$ to test polynomial growth. Two such
+filtrations are contained in each other after a linear change of radius
+\cite{dpr}.
+
+\begin{prop}\label{length}
+Suppose some finite-dimensional, self-adjoint generating space
+$V\subset\mathcal R_K$ contains $1$ and is invariant under $D$.
+Then $\widehat G$ has polynomial growth if and only if both $\widehat K$
+and $D$ have polynomial growth. Under this hypothesis the quotient test
+for growth in Definition~\ref{quotients} passes from $K$ to $G$.
+\end{prop}
+\begin{proof}
+Choose a finite symmetric generating set for $D$ and let $B_D(n)$ be its
+word ball. Put $W=V+span\{s_d:d\in B_D(1)\}$ inside the
+algebraic crossed product. Moving group elements to the right in a word
+of length $n$ gives the first inclusion below. Reading a word from each
+factor in succession gives the second inclusion, so that
+\[
+ W^n\ \subset\ \bigoplus_{d\in B_D(n)} V^n s_d
+       \ \subset\ W^{2n}
+\]
+The middle space has dimension $|B_D(n)|\dim V^n$. This proves the
+growth equivalence. If all the groups in the tests for $G$ have polynomial
+growth, the quotient $G\twoheadrightarrow K$ supplies every test for
+$K$ and the subgroup $\widehat D\subset G$ tests $D$ itself. The last
+assertion follows.
+\end{proof}
+
+For compact connected Lie groups we can remove the invariance hypothesis
+on $V$. In this case one group-dual subgroup of $G$ suffices for both
+analytic properties. The length-function approach to growth of more
+general bicrossed products is developed in \cite{fw}.
+
+\begin{thm}\label{centralgrowth}
+Let $K$ be a compact connected Lie group and let a finitely generated
+discrete group $D$ act on $K$ by automorphisms. Put $C(G)=C(K)\rtimes D$.
+Let $Z=Z(K)^0$ be the identity component of the center, and form the
+discrete group $L=\widehat Z\rtimes D$ using the induced action on its character
+group. Then $\widehat L\subset G$, and $\widehat G$ is amenable if and
+only if $L$ is amenable. Likewise,
+$\widehat G$ has polynomial growth if and only if $L$ has polynomial growth.
+\end{thm}
+\begin{proof}
+Restriction to the characteristic subgroup $Z$ is equivariant. It gives
+the Hopf quotient
+\[
+ C(K)\rtimes D\longrightarrow C(Z)\rtimes D=C^*(L)
+\]
+By \cite[Corollary~6.4]{fmp}, $G$ is coamenable precisely when $D$ is
+amenable. Since $L$ is an extension of $D$ by an abelian group, the same
+criterion holds for $L$. Polynomial growth of $\widehat G$ passes to
+$L$ by \cite[Proposition~4.1]{dpr}.
+
+Conversely, suppose $L$ has polynomial growth. Put $S=[K,K]$. This is a
+compact connected semisimple group, and multiplication
+$Z\times S\to K$ is a surjection with finite kernel \cite{btd}. It is
+$D$-equivariant. Pullback on functions and the identity on $D$ give an
+injection of coefficient algebras
+\[
+ \mathcal R_K\rtimes_{alg}D
+ \ \lhook\joinrel\longrightarrow (\mathcal R_Z\otimes\mathcal R_S)\rtimes_{alg}D
+ \ \simeq\ \mathcal R_S\rtimes_{alg}L
+\]
+Here $\rtimes_{alg}$ denotes the algebraic crossed product. Its elements
+are finite sums of coefficients times group unitaries.
+In the last algebra $\widehat Z$ acts trivially on $S$ and $D$ acts by
+its given automorphisms. The identification sends a product of a character
+of $Z$ and $s_d$ to the corresponding group element of $L$.
+
+The outer automorphism group of $S$ is finite, as follows from its
+semisimple root datum \cite{btd}. Inner automorphisms preserve the
+coefficient space of each irreducible. Thus the translates under $D$ of
+the coefficient space of a faithful representation of $S$ span a
+finite-dimensional space. Adding its adjoint and $1$ gives an
+$L$-invariant generating space. The algebra $\mathcal R_S$ has
+polynomial growth \cite{dpr}. Proposition~\ref{length}, now with $S$
+and $L$ as the two factors, gives polynomial growth of the algebra on
+the right. Its finitely generated subalgebra on the left has polynomial
+growth as well.
+\end{proof}
+
+\begin{thm}\label{joint}
+Let $K$ be a compact connected Lie group, let $D$ be finitely generated
+and let $C(G)=C(K)\rtimes D$. The following are equivalent.
+\begin{enumerate}
+\item Some torus of $G$ detects $C(G)_{central}$, amenability of $\widehat G$
+and polynomial growth of $\widehat G$.
+\item The family of all tori of $G$ jointly detects $C(G)_{central}$.
+\item The action of $D$ preserves a maximal torus of $K$.
+\end{enumerate}
+For each such maximal torus $T$, the group $\Gamma_T=\widehat T\rtimes D$
+gives a maximal group-dual subgroup of $G$ satisfying the first condition.
+\end{thm}
+\begin{proof}
+A faithful restriction to one torus implies joint faithfulness.
+Theorem~\ref{weyl} gives the implication from the second condition to
+the third, including a single virtual character in the common kernel
+when the third condition fails.
+
+Assume that $D$ preserves $T$. Put $Z=Z(K)^0$. Since $Z$ is central and
+connected, $ZT$ is a compact connected abelian group, and maximality of
+$T$ gives $Z\subset T$. The restriction $\widehat T\to\widehat Z$ is
+surjective by duality for compact abelian groups and is equivariant for
+$D$. At the level of full coefficient algebras the maps are
+\[
+ C(G)\ \longrightarrow\ C^*(\Gamma_T)\
+             \longrightarrow\ C^*(\Gamma_Z)
+\]
+Here $\Gamma_Z=\widehat Z\rtimes D$ is the group $L$ of
+Theorem~\ref{centralgrowth}. The first map is faithful on $C(G)_{central}$ by
+Theorem~\ref{weyl}. Amenability
+and polynomial growth pass from $\widehat G$ to $\Gamma_T$ under
+restriction to a quantum subgroup \cite{bp,dpr}. Each property passes
+from $\Gamma_T$ to its group quotient $\Gamma_Z$, and
+Theorem~\ref{centralgrowth} transfers it back to $\widehat G$. This
+proves both equivalences for this same $T$.
+
+Finally suppose a group-dual subgroup contains the torus dual to $\Gamma_T$.
+By Lemma~\ref{abelian} it lies in the torus dual to $\Gamma_A$ for a closed
+$D$-invariant abelian $A\subset K$. Restriction of the resulting maps
+to $C(K)$ gives $T\subset A$. Since $C_K(T)=T$, we have $A=T$.
+This proves maximality.
+\end{proof}
+
+For $K=SU_2$ the criterion can be read directly from the trace.
+Identify the maximal tori with the unoriented axes in the Lie algebra
+$Lie(SU_2)\simeq\mathbb R^3$. The inner automorphism group
+$SO_3$ rotates these axes. Take $D=A_4$ acting by the rotations of a
+regular tetrahedron. An invariant axis would be fixed pointwise by
+each rotation of order three, yet two such rotations have different
+axes. In this example $Z(K)^0=1$. The discrete group supplied by
+Theorem~\ref{centralgrowth} is just $A_4$, so the dual is amenable and
+has polynomial growth.
+
+A noncentral element of $SU_2$ has distinct eigenvalues
+and its centralizer is the unique maximal torus containing it. If an invariant abelian
+subgroup contained such an element, its centralizer would be an invariant
+maximal torus, as in Theorem~\ref{weyl}. Every invariant abelian subgroup
+is therefore contained in $\{I,-I\}$. Writing $\chi$ for the defining
+character, we get the explicit virtual character
+\[
+ P=\chi^2-4,\qquad k=\begin{pmatrix}i&0\\0&-i\end{pmatrix},\qquad P(k)=-4
+\]
+Both central elements have $P=0$, so every torus kills $P$.
+
+For example take $K=\mathbb T^2$ and $D=\mathbb Z$, with the generator
+acting on $\widehat K=\mathbb Z^2$ by
+\[
+ M=\begin{pmatrix}2&1\\1&1\end{pmatrix}
+\]
+Both factors have polynomial growth. Here $Z=K$ and
+$L=\mathbb Z^2\rtimes_M\mathbb Z$ has exponential growth. Indeed, with
+$e=(1,0)$, the $2^n$ sums $\sum_{j=0}^{n-1}\epsilon_jM^je$,
+$\epsilon_j\in\{0,1\}$, are distinct. Projecting onto the expanding
+eigenline gives a nonzero multiple of a sum of powers of
+$(3+\sqrt5)/2>2$, in which the largest differing power decides equality.
+Each sum followed by the same final power $t^n$ is a word of length at
+most $2n$ using the factors $e^{\epsilon_j}t$, in multiplicative
+notation. The torus in Theorem~\ref{centralgrowth} thus sees growth
+created by the action.
+
+\section{Characters for amenable actions}\label{seccharacters}
+
+We now allow an arbitrary compact group $K$, still assuming that
+$C(K)\rtimes D$ is of compact matrix type. The test can require more
+than one invariant abelian subgroup. Put
+\[
+ S=\{k\in K : [\alpha_d(k),\alpha_e(k)]=1 \text{ for all }d,e\in D\}
+\]
+For $k\in S$, the closed subgroup generated by its orbit is abelian
+and $D$-invariant. Conversely every point of an invariant abelian
+subgroup belongs to $S$. The geometric condition below is that the conjugates of $S$ cover $K$.
+
+\begin{thm}\label{classcriterion}
+Suppose $D$ is amenable. The tori of $G$ detect every nonzero element of
+$C(G)_{central}$ if and only if every conjugacy class of $K$ meets a closed
+$D$-invariant abelian subgroup of $K$.
+\end{thm}
+\begin{proof}
+The set $S$ is closed, since for each pair $d,e$ the equation
+$[\alpha_d(k),\alpha_e(k)]=1$ is closed. Its conjugacy saturation
+$K\cdot S=\{hkh^{-1}:h\in K,\,k\in S\}$ is compact. If a class misses
+$S$, choose a continuous function on the compact Hausdorff class space
+$K/Ad(K)$ which equals one on this class and vanishes on the
+image of $S$. Its pullback belongs to $C(G)_{central}$ and vanishes on every
+torus by Lemma~\ref{abelian}.
+
+Conversely take $x\in C(G)_{central}$. Since $D$ is amenable the full and reduced
+crossed products agree. A coefficient of a norm limit is defined by
+$f_d=E_K(xs_d^*)$, where $E_K$ is the conditional expectation onto $C(K)$.
+For a finite sum of characters each $f_d$ is a class function, since
+automorphisms of $K$ preserve class functions. Contractivity gives the
+same conclusion for $x$. The coefficients determine $x$, since their
+translates give all matrix entries in the regular representation.
+If $x\ne0$, choose $d$ and $k$ with $f_d(k)\ne0$. Some
+conjugate of $k$ belongs to one of the subgroups $A$ in the statement.
+Restriction to $C(A)\rtimes D$ has $d$-coefficient $f_d|_A$, by
+continuity from finite sums, and therefore detects $x$.
+\end{proof}
+
+\begin{cor}\label{shiftcharacters}
+Let $F$ be a finite group and let $D=\mathbb Z^r$, $r\ge1$, act by
+translations on $K=F^D$. The tori of the crossed product detect its full
+character algebra if and only if $F$ is abelian.
+\end{cor}
+\begin{proof}
+The functions at one site and the lattice generators give compact matrix
+generation. The shifts of $x\in K$ commute pairwise precisely when all
+its entries commute in $F$. For abelian $F$ we can thus take $A=K$.
+If $F$ is nonabelian, choose $x$ whose entries include representatives
+of every conjugacy class of $F$. Conjugation in $K$ acts site by site.
+If a conjugate of $x$ had commuting entries, they would generate an
+abelian subgroup $J$ meeting every class of $F$. A proper subgroup
+cannot do so, since its conjugates cover at most
+$1+[F:J](|J|-1)<|F|$ elements. Now apply Theorem~\ref{classcriterion}.
+\end{proof}
+
+For $F=S_3$ two sites suffice. Write $s$ for the sign character and
+$c$ for the character of the two-dimensional irreducible representation.
+At the origin and a neighboring site $e$, take the virtual character
+\[
+ P(x)=(1-s(x_0))(1+s(x_e)-c(x_e))
+\]
+Its value is $6$ when $x_0$ is a transposition and $x_e$ is a three-cycle,
+and is zero otherwise, by the character table of $S_3$. No transposition
+commutes with a three-cycle, even after independently conjugating these
+two entries. Thus every torus kills $P$. The same crossed product has
+exponential growth detected by a torus of a quotient
+(Corollary~\ref{ordinaryrow}).
+
+There is also a one-character obstruction on $S_3\times (\mathbb Z_2)^{\mathbb Z^2}$.
+Let $(m,n)$ act by conjugation by $(123)^m$ on $S_3$ and by the shift
+on the second factor. The projection of any invariant abelian subgroup
+to $S_3$ lies in $A_3$, since $(123)$ cycles the three subgroups generated
+by transpositions. Consequently $1-s$ on the first factor vanishes on
+every torus.
+
+\section{Rotations of the free unitary group}\label{secaxis}
+
+For a quantum base the weight spaces of a representation can play
+the role of the eigenlines in the $SU_2$ example. For the fundamental
+matrix of $U_2^+$ there are at most two such spaces on a group dual.
+This gives an axis criterion, and retaining two different weights now
+produces a nonabelian free group.
+
+Let $D$ be a finitely generated discrete group and let
+$\rho:D\to PU_2=SO_3$ be a homomorphism. Write $u$ for the fundamental
+matrix of $U_2^+$, so that $C(U_2^+)$ is generated by the entries of $u$
+subject to unitarity of $u$ and $\bar u$. Choose a unitary lift $U_d$ of
+each $\rho(d)$. The formula $u\mapsto U_d^*uU_d$ gives an action of $D$ by
+quantum group automorphisms, since the scalar ambiguity in a lift cancels.
+We consider Wang's full crossed product \cite{wang}
+\[
+ C(G)= C(U_2^+)\rtimes D,\qquad s_d u s_d^*=U_d^*uU_d
+\]
+Here $s_d$ are the canonical group-like unitaries. If $S$ is a finite
+generating set for $D$, a fundamental matrix for $G$ is
+$v=u\oplus\bigoplus_{d\in S}s_d$. A point of $\mathbb CP^1=S^2$ is a line
+in $\mathbb C^2$, and its antipode is the orthogonal line. An unoriented
+axis is thus an unordered pair of orthogonal lines.
+
+\begin{prop}\label{weights}
+In any Hopf quotient onto a group algebra, the image of $u$ is either $zI_2$ or has two
+distinct weights on the lines of a $\rho(D)$-invariant axis. For each
+invariant axis the diagonal torus in an adapted basis is dual to
+$F_2\rtimes D$, where $D$ permutes the two free generators as it permutes
+the ends of the axis. If there is no invariant axis, every torus factors
+through the scalar quotient $C^*(\mathbb Z\times D)$, itself a toral
+quotient.
+\end{prop}
+\begin{proof}
+Let the target be $C^*(\Lambda)$. With two distinct weights the image of
+$u$ is $Pa+(I-P)b$, where $P$ is a rank-one projection and $a,b\in\Lambda$.
+Conjugation by the image of $s_d$ replaces $a,b$ by their conjugates.
+The crossed-product relation also gives the same matrix with $P$ replaced
+by $U_d^*PU_d$. Linear independence of the group elements shows that
+$U_d^*PU_d$ is either $P$ or $I-P$. The two lines therefore form an
+invariant axis.
+
+Conversely, choose an orthonormal basis on an invariant axis and leave
+the $s_d$ blocks of $v$ in place. Making $u$ diagonal gives two free
+unitaries $a,b$. Each $U_d$ is monomial in this basis, so covariance
+requires exactly the indicated permutation of $a,b$ by $s_d$. This is the
+presentation of $F_2\rtimes D$. With no invariant axis, making $u$
+diagonal in any basis forces its two entries to agree. Its scalar value
+$z$ then commutes with $D$, and an independent generator of $\mathbb Z$
+realizes all these relations in $\mathbb Z\times D$.
+\end{proof}
+
+Set $\chi=Tr(u)$. The irreducibles of $U_2^+$ are indexed by words $w$ in
+two letters corresponding to $u$ and $\bar u$. Their characters $\chi_w$
+are $*$-polynomials in $\chi$, by the fusion rules \cite[Theorem~6.20]{qg}. The
+irreducibles of $G$ are indexed by $(d,w)$, with character $s_d\chi_w$
+\cite[Theorem~6.1]{fmp}. In particular
+\[
+ C(G)_{central}=C^*(\chi,s_d\mid d\in D)\ \subset C(G)
+\]
+The covariance relation gives $s_d\chi s_d^*=\chi$.
+
+\begin{thm}\label{axis}
+The tori of $G$ detect every nonzero element of $C(G)_{central}$ if and only if
+$\rho(D)$ preserves an unoriented axis. With an axis, restriction to its
+single torus is isometric on $C(G)_{central}$.
+\end{thm}
+\begin{proof}
+If there is no axis, every torus sends $\chi$ to $2z$ by
+Proposition~\ref{weights}. Hence $\chi^*\chi-4$ vanishes on all tori.
+It takes the value $-4$ in the copy of $C(U_2^+)$ inside the crossed
+product when we evaluate at
+\[
+ \begin{pmatrix}1&0\\0&-1\end{pmatrix}\in U_2
+\]
+
+Fix an invariant axis and write $\sigma(d)=0$ or $1$ according as $d$
+fixes or exchanges its ends. Restriction to its torus sends
+$\chi/2$ to $(a+b)/2$. To check the norm, represent $C(G)$ faithfully
+on a Hilbert space $K$. Let $T$ be the image of $\chi/2$ and $V_d$ the
+image of $s_d$. Then $T$ is a contraction, and $V_d$ commutes with
+both $T$ and $T^*$. On $K\oplus K$ put
+\[
+ A=\begin{pmatrix}T&\sqrt{I-TT^*}\\
+                   \sqrt{I-T^*T}&-T^*\end{pmatrix},\qquad
+ J=\begin{pmatrix}I&0\\0&-I\end{pmatrix},\qquad B=JAJ
+\]
+The identity $T\sqrt{I-T^*T}=\sqrt{I-TT^*}T$ gives unitarity of $A$.
+The assignments
+\[
+ a\mapsto A,\qquad b\mapsto B,\qquad
+ d\mapsto (V_d\oplus V_d)J^{\sigma(d)}
+\]
+represent $F_2\rtimes D$. Indeed $J$ exchanges $A$ and $B$ by conjugation,
+and $V_d\oplus V_d$ commutes with both. We have
+\[
+ (A+B)/2=T\oplus(-T^*)
+\]
+The first copy of $K$ therefore reduces the images of $(a+b)/2$ and
+of all $d$. On this copy they act as $T$ and $V_d$. Thus the original
+faithful representation of $C(G)_{central}$ is a subrepresentation of the toral
+one on these generators. This proves isometry after norm closure.
+\end{proof}
+
+The analytic conclusions use two facts about the ambient $G$ which hold
+for every action in this family.
+
+\begin{prop}\label{ambient}
+The quantum group $G$ is noncoamenable and $\widehat G$ has exponential
+growth. If $D$ is torsion-free, then $G$ is connected.
+\end{prop}
+\begin{proof}
+The diagonal torus of $U_2^+$ is dual to $F_2$, so $U_2^+$ is
+noncoamenable \cite{bp}. The crossed-product coamenability criterion
+\cite[Corollary~6.4]{fmp} gives noncoamenability of $G$.
+
+Use word length in irreducibles with respect to $v\oplus\bar v$. The ball
+of radius $n$ contains all $2^n$ distinct irreducibles $(1,w)$ with
+$|w|=n$. Indeed $r_{xy}$ is a constituent of $r_x\otimes r_y$ for every
+pair of words $x,y$ \cite[Theorem~6.20]{qg}. Since the volume counts each irreducible
+with the square of its dimension, this gives exponential growth.
+
+For connectedness, consider a nontrivial irreducible $(d,w)$. If $d\ne1$
+and $D$ is torsion-free, its tensor powers have pairwise distinct degrees
+$d^n$ in the crossed-product fusion rules \cite[Remark~6.3]{fmp}. If $d=1$,
+then $w$ is nonempty and its $n$-th tensor power contains $(1,w^n)$.
+In either case the coefficients generate an infinite-dimensional algebra,
+which gives connectedness.
+\end{proof}
+
+\begin{cor}\label{three}
+Suppose $D$ is torsion-free and has polynomial growth. If $\rho(D)$
+preserves an axis, its associated torus detects $C(G)_{central}$, nonamenability
+and exponential growth. In the absence of an invariant axis every
+toral group has polynomial growth and every torus kills $\chi^*\chi-4$.
+\end{cor}
+\begin{proof}
+With an axis, one toral group contains $F_2$ as the subgroup generated by
+$a,b$, so it is nonamenable and has exponential growth. Theorem~\ref{axis}
+gives character detection. Without an axis every toral group is a quotient
+of $\mathbb Z\times D$, hence amenable and of polynomial growth.
+
+Together with Proposition~\ref{ambient} this proves the assertions.
+\end{proof}
+
+\begin{cor}\label{tetra}
+There is a connected $G\subset U_4^+$ with nonamenable dual of exponential
+growth for which every toral group has polynomial growth and every torus
+kills the same nonzero virtual character.
+\end{cor}
+\begin{proof}
+Take $D=\mathbb Z^3\rtimes\mathbb Z$, where the generator $t$ cycles the
+standard basis of $\mathbb Z^3$. This group is torsion-free, and
+$\mathbb Z^3\times\langle t^3\rangle$ has index three. Map the basis to
+the three nonidentity elements of the Klein four group in $A_4$, in the
+order in which conjugation by $(123)$ cycles them, and send $t$ to $(123)$.
+This gives a surjection onto the tetrahedral rotation group $A_4\subset SO_3$.
+An invariant pair of antipodal points would be fixed pointwise, since
+$A_4$ is generated by elements of order three. Two tetrahedral rotations
+with distinct axes have no common fixed point. Corollary~\ref{three} now
+applies. The elements $e_1,t$ generate $D$, so the fundamental matrix
+$u\oplus s_{e_1}\oplus s_t$ has size four.
+\end{proof}
+
+For compact Lie groups and for group duals, the skeleton determines the
+embedded group, and every proper subgroup in the same class has a strictly
+smaller standard torus for some $Q$ \cite[Theorem~13.12]{qg}.
+The tetrahedral action lets us compare two skeletons in the same $U_4^+$.
+
+\begin{thm}\label{skeleton}
+Let $G\subset U_4^+$ be the tetrahedral example of Corollary~\ref{tetra}
+and let $H$ be its scalar torus, dual to $\mathbb Z\times D$. Then
+$H\subsetneq G$ and, as embedded subgroups of $U_4^+$,
+\[
+ T_Q(H)=T_Q(G)\qquad(Q\in U_4)
+\]
+The discrete group $\widehat H$ has polynomial growth, whereas
+$\widehat G$ is nonamenable and has exponential growth.
+\end{thm}
+\begin{proof}
+Equip $H$ with the restriction of the fundamental matrix of $G$.
+For any inclusion $H\subset G$ with this convention, forming the
+diagonal quotient in the basis $Q$ imposes the same off-diagonal
+relations on both sides. Thus $T_Q(H)=H\cap T_Q(G)$. In our example
+Proposition~\ref{weights} gives $T_Q(G)\subset H$ for every $Q$, which
+proves the asserted equality. In the original block basis $T_1(G)=H$.
+The element $\chi^*\chi-4$ from
+the proof of Theorem~\ref{axis} is nonzero on $G$ and vanishes on $H$,
+proving properness. Finally $\mathbb Z\times D$ is virtually abelian,
+and Proposition~\ref{ambient} gives the assertions about $\widehat G$.
+\end{proof}
+
+The same tetrahedral group gives a classical base of polynomial growth
+with an explicit character in the common kernel of all restrictions.
+\begin{thm}\label{sofive}
+There is a connected compact matrix quantum group of Kac type, generated
+by two group-dual subgroups, for which all tori kill the same nonzero
+virtual character. Its discrete dual has polynomial growth.
+\end{thm}
+\begin{proof}
+Let $K=SO_5$. Let $D=\mathbb Z^3\rtimes\mathbb Z$ act through the
+surjection $D\to A_4$ of Corollary~\ref{tetra}. Embed $A_4$ in $SO_5$
+by even permutations of the first four coordinates and use conjugation.
+Form $C(G)=C(K)\rtimes D$. This $G$ is connected. Indeed, an
+irreducible of nonidentity $D$-degree has tensor powers of infinitely
+many degrees, and in identity degree its coefficients belong to $C(K)$,
+where a nontrivial irreducible has infinite image by connectedness.
+The coefficients of the defining representation of $SO_5$, together
+with $1$, span a $D$-invariant generating space $V$. Both the dual of $SO_5$ and the virtually
+abelian group $D$ have polynomial growth \cite{dpr}.
+Proposition~\ref{length} applied to $V$ gives the growth assertion.
+
+A maximal torus of $SO_5$ rotates two orthogonal real planes and fixes
+their orthogonal line. Its normalizer preserves this decomposition up to
+interchanging the two planes. If $A_4$ normalized such a torus, it would
+preserve each plane, since it has no quotient of order two. The same
+fact makes its determinant on each plane positive and its action on
+the line trivial. Its image would lie in $SO_2\times SO_2$, contrary
+to the faithful nonabelian permutation action.
+
+The defining representation of $SO_5$ has five distinct weights, each
+of multiplicity one. The virtual character in Theorem~\ref{weyl} is
+therefore the usual discriminant
+\[
+ P(k)=disc_X\det(XI_5-k)
+\]
+For instance it is nonzero at a rotation with eigenvalues
+$1,e^{\pm\pi i/3},e^{\pm\pi i/2}$. Its expression as a polynomial in
+the characteristic coefficients writes it directly in terms of exterior
+power characters. By Theorem~\ref{weyl} it vanishes on every torus of $G$.
+
+It remains to show generation. Let $E$ be the diagonal sign subgroup
+of $SO_5$, and let $C$ be the circle of rotations in the plane spanned
+by $e_5$ and $v=(e_1+e_2+e_3+e_4)/2$. The group $A_4$ preserves $E$
+and fixes $C$ pointwise. The conjugates of the infinitesimal rotation
+$e_5\wedge v$ by $E$ span all $e_5\wedge e_i$, $1\le i\le4$. Indeed
+the first four signs are arbitrary and the fifth contributes an overall
+sign. Bracketing these rotations gives the remaining $e_i\wedge e_j$.
+It follows that finite products from $E$ and $C$ are dense in $SO_5$.
+
+Take the tori with discrete groups $\widehat E\rtimes D$ and
+$\widehat C\rtimes D$ from Lemma~\ref{abelian}. Suppose a Hopf
+$*$-ideal lies in the kernels of both restrictions and take an element
+$\sum_d f_ds_d$ of this ideal in $\mathcal R_G$. Its iterated
+coproduct vanishes after restriction to any ordered list of the two
+tori. The coefficient of $(d,\ldots,d)$ in that restriction is
+$(a_1,\ldots,a_m)\mapsto f_d(a_1\cdots a_m)$, with $a_i$ in the
+corresponding $E$ or $C$. Density forces each $f_d$ to vanish. Hence
+these two tori generate $G$, even though the discriminant vanishes on
+each of them separately.
+\end{proof}
+
+\section{Tori of quotients and quantum automorphism groups}\label{secquotients}
+
+In the rotation examples of Section~\ref{secaxis}, pullback of the
+coefficients of $U_2^+$ gives a quantum quotient
+$G\twoheadrightarrow U_2^+$. Its diagonal torus is dual to $F_2$ for
+every action of $D$. The following observation explains when
+the quotient test passes from a base to its crossed product.
+\begin{prop}\label{permanence}
+Suppose the quotient test for amenability in Definition~\ref{quotients} holds
+for a compact matrix quantum group $K$ of Kac type. It also holds for
+$G$ with $C(G)=C(K)\rtimes D$, for any action of a finitely
+generated discrete group $D$ by quantum group automorphisms.
+\end{prop}
+\begin{proof}
+Suppose every group tested for $G$ is amenable. The inclusion
+$C(K)\subset C(G)$ gives a quantum quotient $G\twoheadrightarrow K$.
+Composing with this quotient shows that every group tested for $K$ is
+also tested for $G$, so $K$ is coamenable by hypothesis.
+
+There is a second test inside $G$ itself. The counit of $K$ is invariant
+under the action of $D$, so evaluation at the counit on $C(K)$ and
+$s_d\mapsto d$ give a Hopf $*$-surjection $C(G)\to C^*(D)$.
+Thus $\widehat D\subset G$ and $D$ is amenable. By the crossed-product
+criterion \cite[Corollary~6.4]{fmp}, $G$ is coamenable. In the
+other direction, coamenability passes to compact quantum quotients
+and then to their tori, as recalled in Proposition~\ref{twistnecessary}.
+\end{proof}
+
+For polynomial growth Proposition~\ref{length} gives an analogous
+conclusion when the action preserves a finite-dimensional generating
+space. We next examine how much these quotient tests can see for quantum
+automorphism groups. The exceptional algebra occurs already in dimension
+five.
+Consider the quantum automorphism group $G$ of the algebra
+$B=\mathbb C\oplus M_2(\mathbb C)$ with its canonical trace
+\[
+ \tau(z,X)=\frac{z+2Tr(X)}5
+\]
+where $Tr$ is the ordinary matrix trace. This is the normalized trace of
+the left regular representation. The universal trace-preserving coaction
+on $B$ gives a compact matrix quantum group of Kac type \cite{generic}.
+Conjugating the matrix summand gives a classical subgroup
+$PU_2=SO_3\subset G$.
+
+\begin{lem}\label{fiveorbit}
+Every group-dual subgroup of $G$ is contained in this $SO_3$.
+The possible discrete groups are precisely $\mathbb Z$, the finite
+cyclic groups, and the Klein four group.
+\end{lem}
+\begin{proof}
+A group-dual subgroup gives a grading $B=\bigoplus_g B_g$ and a coaction
+$\alpha(x)=x\otimes g$ for $x\in B_g$. Let $p:B\to\mathbb C$ be the
+scalar character. The algebra map
+\[
+ \varphi=(p\otimes id)\alpha:B\longrightarrow\mathbb C[\Gamma]
+\]
+sends $x\in B_g$ to $p(x)g$. Its image is spanned by the group elements
+which occur. Since it is a finite-dimensional unital $*$-algebra, these
+elements form a finite subgroup $F\subset\Gamma$ and the image is
+$\mathbb C[F]$. If $\varphi$ were injective, $|F|=5$. Such a group is
+cyclic, whereas $B$ is noncommutative. Hence $\ker\varphi\ne0$.
+Composing $\varphi$ with the counit gives $p$, so
+$\ker\varphi\subset\ker p=M_2(\mathbb C)$. Simplicity of the matrix
+summand gives equality.
+
+The map $\varphi$ preserves degrees, so the matrix summand is a graded
+ideal. If $e$ is its unit, comparison of homogeneous components in
+$ex=x$ shows that the neutral component $e_1$ acts as the identity
+on every homogeneous element of the ideal. Thus $e_1e=e$, while
+$e_1e=e_1$ since $e_1$ belongs to the ideal. Both $e$ and $1-e$ are
+therefore fixed. On
+$M_2(\mathbb C)$ the coaction preserves the ordinary trace. The universal
+trace-preserving quantum automorphism group of $M_2(\mathbb C)$ is
+$PU_2=SO_3$. Indeed the quantum and classical groups here have the
+$SO_3$ fusion rules \cite{generic}, and restriction sends the
+three-dimensional summand of $M_2$ to the usual rotation representation.
+Induction with the fusion rules identifies every irreducible on
+restriction, hence also its coefficient coalgebra. This proves the
+asserted factorization.
+
+Since $C(SO_3)$ is commutative, every group-dual subgroup is classical
+abelian. A rotation through an angle other than $0$ or $\pi$ has a circle
+as its centralizer. A closed
+subgroup of this circle is finite cyclic or the full circle. If every
+nonidentity element is a half-turn, commuting half-turns about distinct
+axes have perpendicular axes, and two of them generate a Klein four
+group. This gives the list on taking duals, and each case occurs.
+\end{proof}
+
+\begin{thm}\label{five}
+The compact quantum group $G$ has no proper nontrivial compact quantum
+quotient. Its discrete dual is nonamenable and has exponential growth.
+Nevertheless in every diagram $G\twoheadrightarrow H\supset\widehat\Lambda$
+the group $\Lambda$ has at most linear growth. In particular the two
+quotient tests in Definition~\ref{quotients} both fail, even for connected $G$.
+\end{thm}
+\begin{proof}
+The irreducibles of $G$ have the $SO_3$ fusion rules \cite{generic}.
+Writing them as $r_0=1,r_1,r_2,\ldots$, the coaction on $B$ is $1+r_1$ and
+\[
+ r_j\otimes r_k=\bigoplus_{s=|j-k|}^{j+k}r_s
+\]
+Under a compact quantum quotient the polynomial Hopf algebra of $H$
+embeds in that of $G$. Its simple coefficient coalgebras give a subset
+of these irreducibles closed under tensor products and constituents.
+If it contains $r_j$ with $j\ge1$, then $r_j\otimes r_j$ contains $r_1$,
+and tensor powers of $r_1$ contain every $r_k$. The inclusion is thus
+either trivial or onto, as in Wang's proof in \cite{simple}.
+In particular $G$ has no nontrivial finite quantum quotient, so is connected.
+
+For growth, put $d_k=\dim r_k$. Since $\dim B=5$, the fusion rule gives
+\[
+ d_0=1,\qquad d_1=4,\qquad d_{k+1}=3d_k-d_{k-1}\quad(k\ge1)
+\]
+In particular $d_{k+1}\ge2d_k$ by induction. The ball of radius $n$ for
+$1+r_1$ has volume $\sum_{k=0}^n d_k^2$, which grows exponentially.
+Nonamenability in dimension five follows from the coamenability
+criterion of \cite{generic}. Finally $H$ is trivial or isomorphic to $G$,
+so Lemma~\ref{fiveorbit} accounts for every $\Lambda$ in the test.
+\end{proof}
+
+This is a nonclassical quantum group all of whose group-dual subgroups
+are classical. Such a group is called \emph{strange} in \cite{bbd}. The same pair of matrix sizes also occurs in the computation of
+outer quantum symmetries in \cite[Section~3.3, Example~2]{goswami}.
+
+\begin{cor}\label{fivecharacters}
+Let $G=G^+(\mathbb C\oplus M_2)$ with its canonical
+trace. Restriction to one circle is injective on the algebraic span of
+the irreducible characters, whereas every torus kills the same nonzero
+element of the norm-closed character algebra $C(G)_{central}$.
+\end{cor}
+\begin{proof}
+Put $x=\chi_{r_1}=x^*$. The fusion rules in Theorem~\ref{five} express
+every irreducible character as a polynomial in $x$. On the subgroup
+$SO_3$ the action on $\mathbb C\oplus M_2$ splits as two trivial
+representations and the three-dimensional rotation representation.
+Hence $x|_{SO_3}=1+Tr(R)$. On rotations through angle $\theta$
+about a fixed axis this is $2+2\cos\theta$, with range $[0,4]$.
+Thus a polynomial in $x$ vanishing on this circle is the zero polynomial.
+
+Let $h$ be the Haar state. Irreducibility and the fusion rule give
+$h(x)=0$ and $h(x^2)=1$. If $x$ were positive, the inequality
+$x^2\le\|x\|x$ would contradict these two equalities. Therefore
+$x_-=\max(-x,0)$ is a nonzero element of $C(G)_{central}$. Its restriction to
+$SO_3$ is zero, and all tori factor through that subgroup by
+Lemma~\ref{fiveorbit}.
+\end{proof}
+
+Is this failure specific to the algebra of dimension five? For the
+canonical trace, the possible block sizes give a complete answer.
+
+\begin{prop}\label{onlyfive}
+Among the quantum groups $K=G^+(B)$ with the canonical
+trace, $B=\mathbb C\oplus M_2$ is the unique algebra, up to isomorphism,
+for which the tori of $K$ fail to detect amenability or polynomial growth.
+\end{prop}
+\begin{proof}
+Put $N=\dim_{\mathbb C} B$. For $N\le3$ we have the finite groups $S_N$. At $N=4$ the irreducibles
+have the $SO_3$ fusion rules with $\dim r_1=3$ and hence
+$\dim r_j=2j+1$. The ball volumes $\sum_{j=0}^n(2j+1)^2$ are polynomial.
+Both cases are coamenable \cite{generic}, and both properties pass to the
+tori \cite{bp,dpr}.
+
+Let $N\ge5$. We produce a trace-preserving group grading whose support
+generates a nonamenable group of exponential growth. Its coaction on $B$
+is faithful in the sense that its coefficients generate the group algebra,
+so its group dual embeds in $K$. By permanence this forces the ambient
+dual to be nonamenable and to have exponential growth. For a summand $M_k$ one can give matrix
+units $e_{ij}$ degree $g_i^{-1}g_j$ for any list of group elements $g_i$.
+On a scalar block $\mathbb C^m=C^*(\mathbb Z_m)$ one can use the Fourier
+grading by $\mathbb Z_m$. Both gradings preserve the canonical trace.
+Gradings on distinct direct summands combine as gradings by the free
+product of their groups, since products between summands vanish.
+All unused summands may be placed in the identity degree.
+
+If $B$ has a summand $M_k$ with $k\ge3$, use the list $1,a,b,1,\ldots,1$
+in $F_2=\langle a,b\rangle$. If it has two $M_2$ summands, grade each
+by $\mathbb Z$, giving $F_2$ once again. If there is just one $M_2$ and
+all other summands are scalar, two scalar summands together give
+$\mathbb Z_2$, and the matrix summand gives $\mathbb Z$. This gives
+$\mathbb Z_2*\mathbb Z$ whenever there are at least two scalar summands.
+Finally, for $B=\mathbb C^N$, splitting off a pair and a triple gives
+$\mathbb Z_2*\mathbb Z_3$. Each displayed group contains a free group on
+two generators. The sole unaccounted case is $\mathbb C\oplus M_2$,
+which fails both tests by Theorem~\ref{five}.
+\end{proof}
+
+The exceptional algebra has nonamenable dual. Its failure of the quotient
+growth test leaves the following implication to be determined.
+
+\begin{question}\label{amenablegrowth}
+Suppose $\widehat G$ is amenable and every group $\Lambda$ in a diagram
+$G\twoheadrightarrow H\supset\widehat\Lambda$ as in
+Definition~\ref{quotients} has polynomial growth. Must $\widehat G$ have
+polynomial growth?
+\end{question}
+
+\section{Two conjectures on amenability and growth}\label{secanalytic}
+
+For $G=G^+(\mathbb C\oplus M_2)$ there is another way
+to recover a torus of exponential growth. A cocycle representing the nontrivial
+class on the Klein four group twists $G$ into $S_5^+$ \cite[Theorem~4.8]{mrozinski}.
+The latter contains the dual of $\mathbb Z_2*\mathbb Z_3$, acting on a pair
+and a triple of points \cite{bbd}. More generally, for a finite-dimensional
+$C^*$-algebra $B$ with its canonical trace, $G^+(B)$ is a
+unitary cocycle deformation of $S_N^+$, where $N=\dim_{\mathbb C}B$
+\cite[Theorem~3.1]{behy}.
+
+A unitary dual $2$-cocycle twist gives a unitary monoidal equivalence
+which preserves the Hilbert space dimension of every representation. Conversely, a dimension-preserving unitary
+monoidal equivalence is realized, up to isomorphism, by such a twist
+\cite{bdv}. Write $H\sim K$ for this equivalence. The identity quotient and the trivial twist are allowed throughout.
+
+\begin{prop}\label{twistnecessary}
+Let $G$ be a compact matrix quantum group of Kac type. For every diagram
+\[
+ G\twoheadrightarrow H,\qquad H\sim K,\qquad \widehat\Lambda\subset K
+\]
+with $H$ a compact matrix quantum quotient of $G$ and $K$ a unitary dual
+$2$-cocycle twist of $H$, amenability of $\widehat G$ implies amenability
+of $\Lambda$, and polynomial growth of $\widehat G$ implies polynomial
+growth of $\Lambda$. A dimension-preserving unitary monoidal
+equivalence of $G$ preserves the collection of groups $\Lambda$ arising
+in these diagrams, up to isomorphism.
+\end{prop}
+
+\begin{proof}
+Growth passes through compact quantum quotients and subgroups
+\cite{dpr}. Under $H\sim K$ a self-conjugate generating representation
+containing $1$ and its image have exactly the same constituents in
+each tensor power, with the same dimensions. The two ball volumes agree
+at every radius.
+
+For a compact quantum quotient the counit restricts, and the inclusion
+of coefficient algebras is isometric for reduced norms because the Haar states
+agree and the reduced Haar state is faithful. Thus the quotient inherits
+a bounded reduced counit. For a compact quantum subgroup, take a self-conjugate generator
+$v$ containing $1$ and put $m=\dim v$. Restriction can only increase
+the multiplicity of $1$ in $v^{\otimes 2n}$. This multiplicity is the
+$2n$-th Haar moment of $\chi_v$, whose $2n$-th root tends to the
+reduced norm by faithfulness of the reduced Haar state. Hence if the
+ambient norm is $m$, the subgroup norm is also $m$. On both sides we can write $v=1\oplus w$, with
+$\chi_v=1+\chi_w$ and $\|\chi_w\|\le m-1$. Thus the spectrum is
+contained in $[2-m,m]$. Norm $m$ is therefore equivalent to the
+presence of the positive endpoint $m$, the quantum Kesten criterion
+for coamenability \cite{bp}.
+Under $H\sim K$ both $m$ and the multiplicity of $1$ in every
+$v^{\otimes 2n}$ are preserved. Thus the reduced character norm attains
+$m$ on one side exactly when it does on the other. This also follows
+from the fusion-ring criterion \cite[Theorem~4.5]{kyed}.
+
+Finally a compact matrix quantum quotient is specified by a full rigid
+tensor subcategory of $Rep(G)$ closed under subobjects and
+finite sums and generated by one object and its conjugate. Its coefficient
+algebra is the span of the coefficient spaces of the simple objects in
+the subcategory. A monoidal equivalence carries each such subcategory
+to another and restricts to an equivalence there, preserving dimensions.
+Composing the inverse of the transported subcategory equivalence with $H\sim K$ gives the same
+tested group. The inverse equivalence proves equality of the collections.
+\end{proof}
+
+In particular, any finite succession of compact matrix quantum quotients
+and unitary dual cocycle twists before taking a torus reduces to a
+single quotient followed by a single twist. Indeed, successive quotients compose,
+and a quotient taken after an equivalence can be transported back along
+that equivalence by the preceding proof.
+
+\begin{conjecture}[Amenability]\label{twistamen}
+Let $G$ be a compact matrix quantum group of Kac type. Its discrete
+dual is amenable if and only if $\Lambda$ is amenable in every diagram
+\[
+ G\twoheadrightarrow H,\qquad H\sim K,\qquad \widehat\Lambda\subset K
+\]
+where $H$ is a compact matrix quantum quotient of $G$ and $K$ is a
+unitary dual $2$-cocycle twist of $H$.
+\end{conjecture}
+
+\begin{conjecture}[Polynomial growth]\label{twistgrowth}
+Let $G$ be a compact matrix quantum group of Kac type. Its discrete
+dual has polynomial growth if and only if $\Lambda$ has polynomial
+growth in every diagram
+\[
+ G\twoheadrightarrow H,\qquad H\sim K,\qquad \widehat\Lambda\subset K
+\]
+where $H$ is a compact matrix quantum quotient of $G$ and $K$ is a
+unitary dual $2$-cocycle twist of $H$.
+\end{conjecture}
+
+The open direction in each case is the existence of a witness. In the
+first case a nonamenable dual should yield a nonamenable $\Lambda$. In
+the second case the conclusion sought is a single $\Lambda$ with growth
+that is not polynomial, even when $\widehat G$ is amenable. The group
+$\mathbb Z_p\wr\mathbb Z$ supplies such a witness in Corollary~\ref{ordinaryrow}.
+
+The permanence arguments of Propositions~\ref{permanence} and
+\ref{length} also apply to Conjectures~\ref{twistamen} and~\ref{twistgrowth}. Indeed, for
+$C(G)=C(L)\rtimes D$, every diagram for $L$ is a diagram for $G$
+after composition with $G\twoheadrightarrow L$, and $\widehat D\subset G$
+supplies the other factor. Thus the amenability implication passes from
+$L$ to $G$ for any action. The growth implication does so whenever $D$
+preserves a finite-dimensional generating space as in Proposition~\ref{length}.
+
+\begin{thm}\label{twistclass}
+Conjectures~\ref{twistamen} and~\ref{twistgrowth} hold for
+$C(G)=C(L)\rtimes D$, where $D$ is finitely generated and acts by
+quantum group automorphisms, for the following bases and actions.
+\begin{enumerate}
+\item $L$ is a compact connected Lie group.
+\item $L=U_2^+$ with the rotation action of Section~\ref{secaxis}.
+\item $L=G^+(B)$ for a finite-dimensional $C^*$-algebra
+with its canonical trace.
+\end{enumerate}
+They also hold for every unitary dual cocycle twist of these crossed products.
+\end{thm}
+\begin{proof}
+In the first case Theorem~\ref{centralgrowth} supplies a single group
+inside $G$ testing both properties. In the second case the quotient
+$G\twoheadrightarrow U_2^+$ supplies $F_2$ without twisting.
+
+In the third case $G\twoheadrightarrow L$. If $N=\dim B\ge5$,
+Proposition~\ref{onlyfive} gives a group detecting both failures directly,
+except at $B=\mathbb C\oplus M_2$. In that case take
+the twist $K=S_5^+$ of $L$ and its toral group $\Lambda=\mathbb Z_2*\mathbb Z_3$. Equivalently, for every $N\ge5$ one can use the
+same pair and triple in the model $S_N^+$ of \cite[Theorem~3.1]{behy}.
+
+If $N\le4$, the base $L$ is coamenable and has polynomial growth, as in
+Proposition~\ref{onlyfive}. The counit supplies $\widehat D\subset G$,
+so the test includes $D$. When $D$ is amenable, $G$ is coamenable by
+\cite[Corollary~6.4]{fmp}. For growth, Proposition~\ref{length} applies
+to any action. For $N\le3$ use the whole finite-dimensional algebra, and
+for $N=4$ use the coefficient space of $1+r_1$. Indeed $r_1$ is the
+unique irreducible whose tensor square has three distinct constituents,
+so every automorphism preserves this space. Thus polynomial growth of
+$D$ implies polynomial growth of $\widehat G$. The last assertion follows
+from Proposition~\ref{twistnecessary} and invariance of the two properties.
+\end{proof}
+
+The third case also includes every compact quantum group $L$ of Kac
+type having the $SO_3$ fusion rules. By \cite{mrozinski} it is
+$G^+(B,\varphi)$ for a homogeneous faithful state, with
+$B=1+r_1$ as a representation. On this finite-dimensional algebra the invariant state is the
+canonical trace. To see this, let $U$ implement the coaction on
+$L^2(B,\varphi)$. Left multiplication $b\mapsto L_b$ intertwines the
+coaction with conjugation by $U$ on $End(B)$. In Kac type
+$\bar U$ is unitary, so conjugation preserves the ordinary matrix trace.
+Thus $b\mapsto Tr(L_b)/\dim B$ is invariant. Uniqueness follows from the
+single copy of $1$ in $B$, giving the assertion.
+
+\section{Bicrossed products with a compact Lie factor}\label{secmatched}
+
+Let $D$ be discrete and $K$ compact. The following formulas also apply
+to the infinite component groups of the next two sections. For a matched pair we use the
+factorization $dk=\alpha_d(k)\beta_k(d)$, with $\alpha_d(k)\in K$ and
+$\beta_k(d)\in D$. Factoring $dhk$ and $dsk$ in two ways gives
+\[
+ \alpha_d(hk)=\alpha_d(h)\alpha_{\beta_h(d)}(k),\qquad
+ \beta_k(ds)=\beta_{\alpha_s(k)}(d)\beta_k(s)
+\]
+Here $\alpha$ is a left action and $\beta$ a right action. When
+$\beta$ is trivial, $\alpha$ acts by group automorphisms and we
+recover the ordinary crossed product. Write $G$ for
+the compact bicrossed product. Its coefficient algebra is the algebraic
+crossed product $\mathcal R_K\rtimes_{alg}D$, with
+$s_d f s_d^*=f\circ\alpha_{d^{-1}}$. Functions have their usual
+coproduct, and the canonical unitaries satisfy
+\[
+ \Delta(s_d)=\sum_{r\in\beta_K(d)}
+ s_d 1_{\{k:\beta_k(d)=r\}}\otimes s_r
+\]
+The orbits are finite by continuity and compactness. The Haar state
+integrates the identity coefficient against Haar measure on $K$. It
+is a trace since $\alpha$ preserves this measure. Evaluation at the
+identity of $K$ gives $\widehat D\subset G$, and $\widehat G$ is
+amenable exactly when $D$ is amenable \cite[Theorem~3.4 and
+Corollary~3.7]{fmp}. Thus for bicrossed products the remaining analytic
+question concerns growth when $D$ itself has polynomial growth.
+
+\begin{thm}\label{finitecomponents}
+Let $K$ be a compact Lie group, let $D$ be finitely generated and put
+$K_0=K^0$ and $Z=Z(K_0)^0$. In the bicrossed product the torus dual to
+$\widehat Z\rtimes D$ detects both amenability and polynomial
+growth. The action of $D$ on the character group here comes from its
+action on $K_0$ by automorphisms.
+\end{thm}
+\begin{proof}
+The continuous map $h\mapsto\beta_h(d)$ is constant on $K_0$, with
+value $d$. Each $\alpha_d$ fixes the identity and preserves $K_0$.
+By the matched-pair identities, its restriction $\theta_d$ to $K_0$ is an
+automorphism and
+\[
+ \alpha_d(hk)=\theta_d(h)\alpha_d(k)\qquad(h\in K_0)
+\]
+Restriction of functions to $K_0$ and $s_d\mapsto s_d$ give the ordinary
+crossed product on $K_0$ as a quantum subgroup. Theorem~\ref{centralgrowth}
+supplies the stated torus there, and the amenability assertion follows.
+
+For growth, choose representatives $k_1=1,\ldots,k_b$ for the cosets
+$K_0k_i$. Take a finite-dimensional self-adjoint generating space
+$V\subset\mathcal R_{K_0}$ containing $1$ and stable under left
+and right translations. The coefficient spaces of a faithful
+representation, its conjugate and $1$ give such a $V$. Use independent
+copies of $V$ on the $b$ cosets to obtain a space $E$ on $K$. A
+coefficient on one coset extended by zero has finite-dimensional right
+translation span, since right translation permutes the cosets and acts
+on their coordinates by translations. Hence $E\subset\mathcal R_K$.
+Conversely, each coefficient on $K$ restricts on each coset to a
+representative function on $K_0$. Since $E$ includes the coset
+indicators, it generates $\mathcal R_K$.
+
+Adjoin the unitaries for the same symmetric set of generators of $D$ to
+$E$ and to $V$, giving spaces $W$ and $W_0$ in the two crossed products.
+For a word of degree $d$ with coefficient $f$, record the $b$ entries
+$f(hk_i)s_d$. Multiplying on the right by $s_e$ replaces $d$ by $de$.
+Multiplying on the right by $v\in E$ multiplies the $i$th entry on the
+right by the function $h\mapsto v(h\alpha_{d^{-1}}(k_i))$ in $V$.
+Indeed, commuting this function past $s_d$ introduces $\theta_{d^{-1}}$
+on $h$, giving precisely $v(\alpha_{d^{-1}}(hk_i))$. Thus the entries
+of a word of length $n$ lie in $W_0^n$. Recording the entries degree by degree defines an injective linear map
+into $b$ copies of $W_0^n$, since the cosets cover $K$. Restriction to the
+first coset maps $W^n$ onto $W_0^n$. We obtain
+\[
+ \dim W_0^n\ \le\ \dim W^n\ \le\ b\dim W_0^n
+\]
+The polynomial growth assertion now follows from Theorem~\ref{centralgrowth}.
+\end{proof}
+
+\section{The component group and the cyclic case}\label{seccomponent}
+
+Let $D=\mathbb Z^r$, $r\ge1$, and assume that $K/K^0$ is infinite.
+Every bicrossed product in this class is coamenable. It is also
+disconnected, since the Hopf inclusion of functions on $K$ gives $G\twoheadrightarrow K$, and the profinite group $K/K^0$
+has a nontrivial finite quotient. We first give the reduction used in
+both the cyclic and the higher-rank growth arguments. A group shift
+over a finite group $F$ means a closed translation-invariant subgroup
+of $F^D$, with pointwise multiplication.
+
+\begin{lem}\label{shiftmodel}
+Suppose $G$ is compact matrix and write $P=K/K^0$. The reverse action
+of $K$ on $D$ is by a finite group of lattice automorphisms. Its kernel
+$H$ contains $K^0$. The matched pair descends to $(D,P)$, and
+$Q=H/K^0$ is an infinite open subgroup of $P$ on which $D$ acts by
+automorphisms. As a $D$-system, $Q$ is isomorphic to a group shift over
+a finite group.
+\end{lem}
+\begin{proof}
+Let $S$ be the union of the $K$-orbits of a basis of $D$ and its
+negatives. This generating set is finite. The matched-pair identity
+applied to $(-s)+s$ gives $-\beta_k(s)=\beta_{\alpha_s(k)}(-s)$, so
+$S$ is symmetric. For $s\in S$ one has
+\[
+ \beta_k(d+s)-\beta_k(d)=\beta_{\alpha_d(k)}(s)\in S
+\]
+Thus $\beta_k$ is an automorphism of the Cayley graph of $(D,S)$ fixing
+zero. Here its linearity has an elementary proof. Each coordinate of the
+identity map is harmonic since $S=-S$, and so is each coordinate of
+$\beta_k$. Its difference along a basis vector is harmonic by translation
+invariance and takes only finitely many values by the displayed identity.
+At its maximum every neighbor has the same value. Connectedness makes
+the difference constant, which proves linearity. This is also a case of
+\cite{mmv}. There are finitely many possible maps because the basis is
+sent into $S$. Substituting additivity into the identity for $\beta_k(d+s)$ gives
+$\beta_{\alpha_d(k)}=\beta_k$.
+
+The kernel $H$ of this right action is open, normal and $D$-invariant.
+On $H$ the maps $\alpha_d$ are automorphisms, and
+$\alpha_d(hk)=\alpha_d(h)\alpha_d(k)$ for $h\in H$. Since $K^0=H^0$,
+this identity gives descent to $P$. The finite index of $H$ makes
+$Q$ infinite and open in $P$.
+
+Restriction to $H$ gives the ordinary crossed product
+$C(H)\rtimes D$ as a quantum subgroup of $G$, hence it is compact matrix.
+Write finitely many algebra generators of its coefficient algebra as
+sums $\sum_j f_js_j$. All the functions so obtained lie in the
+coefficient space of a finite-dimensional unitary representation $\rho$
+of $H$. Take the algebra generated by the $D$-translates of those
+coefficients and their adjoints. Crossing it with $D$ contains the
+chosen generators, and taking the part of degree zero gives all of
+$\mathcal R_H$. Hence
+$h\mapsto(\rho(\alpha_d(h)))_{d\in D}$ embeds $H$ as a closed subgroup
+of a compact Lie group shift.
+
+By the descending chain theorem for compact Lie group shifts
+\cite[Theorem~3.2]{ks}, the closed $D$-invariant subgroups of
+$H$ satisfy the descending chain condition. It passes to $Q$ by
+preimages. For $U$ open normal in the profinite group $Q$ set
+$N_U=\bigcap_{d\in D}\alpha_d(U)$. The family of these invariant
+subgroups is closed under finite intersections and its total intersection
+is trivial. A minimal member is therefore trivial. For the corresponding
+$U$, reading the quotient $Q\to Q/U$ at all translates embeds $Q$
+as a closed group shift on the finite alphabet $Q/U$.
+\end{proof}
+
+We will use the following observation when locating a torus of a
+quotient. For $E=nD$ and a closed $E$-invariant abelian subgroup
+$A\subset Q$ we have
+\[
+ \mathcal R_G\ \supset\
+ \mathcal R_P\rtimes_{alg} E
+ \ \longrightarrow\
+ \mathbb C[\widehat A\rtimes E]
+\]
+Indeed $E$ is characteristic in $D$ and the orbit indicators in
+$\Delta(s_d)$ descend to $P$. Thus the middle algebra is the coefficient
+Hopf $*$-algebra of $(E,P)$. The last arrow restricts functions to $A$,
+is onto by Peter--Weyl, and respects the coproduct because $\beta$ is
+trivial on $A$. Whenever $\widehat A\rtimes E$ is finitely generated,
+the middle algebra can be replaced by a compact matrix coefficient
+algebra. Lift group generators to it and take the finitely many coefficient
+spaces of irreducibles needed to contain the lifts. Those spaces and
+their adjoints generate a coefficient Hopf $*$-algebra of compact matrix
+type still surjecting onto the group algebra. For $P=K$ and $E=D$ the
+arrows already give a torus in $G$ itself.
+
+We now specialize to $D=\mathbb Z$. Write $\mathbb Z_p$ for the cyclic group
+of prime order $p$.
+
+\begin{lem}\label{lampshift}
+Let $X$ be an infinite closed shift-invariant subgroup of $F^{\mathbb Z}$,
+where $F$ is a finite group and $T$ is the bilateral shift. For some
+prime $p$, $X$ contains a closed invariant subgroup isomorphic, with its
+shift, to $(\mathbb Z_p)^{\mathbb Z}$.
+\end{lem}
+\begin{proof}
+Let $P_l$ be the group of words of length $l$ appearing in $X$. The
+subgroups $\{a\in F:1^la\in P_{l+1}\}$ decrease with $l$ and stabilize,
+say at $r\ge1$. The possible letters following a word of length $l\ge r$
+form a coset of this stabilized group. They are contained in the coset
+for the suffix of length $r$, so the two cosets coincide. Induction and
+closedness now show that a configuration belongs to $X$ whenever all its
+blocks of length $r+1$ occur in $X$.
+
+As $X$ is infinite, $|P_l|$ is unbounded. For $l>2r$ with
+$|P_l|>|F|^{2r}$, restriction to the first and last $r$ letters has
+nontrivial kernel. Pad a nonidentity word in this kernel with identities
+on both sides. Every block of length $r+1$ is admissible, so we have a
+nonidentity element of finite support in $X$.
+
+Among such elements choose one with the smallest support cardinality.
+A suitable power $y$ has prime order $p$ and still has minimal support.
+For $j\ne0$ the commutator $[y,T^jy]$ is supported in
+$supp(y)\cap(supp(y)+j)$, strictly smaller
+than $supp(y)$. It is therefore trivial. Thus all translates
+of $y$ commute, even at sites where their supports overlap.
+
+Arbitrary products of powers of these translates are defined coordinatewise,
+as only finitely many factors contribute at each site. They give a continuous
+shift-equivariant homomorphism $(\mathbb Z_p)^{\mathbb Z}\to X$ with nontrivial
+compact image $A$. On taking Pontryagin duals, $\widehat A$ embeds as a
+nonzero submodule of the regular module $R=\mathbb F_p[z,z^{-1}]$,
+where $z$ acts by translation. Every nonzero ideal of this Laurent
+polynomial ring is principal and is isomorphic to $R$ as an $R$-module.
+Dualizing gives the required isomorphism with its shift.
+\end{proof}
+
+\begin{thm}\label{cycliclamps}
+Let $G$ be a compact matrix bicrossed product of $\mathbb Z$ and a compact
+group $K$ with infinitely many connected components. For some prime $p$
+there is a compact matrix quantum quotient $L$ of $G$ such that
+\[
+ G\twoheadrightarrow L\supset\widehat\Lambda,\qquad \Lambda=\mathbb Z_p\wr\mathbb Z
+\]
+When $K$ is profinite one can take $L=G$. In all cases $\widehat G$
+is amenable and has exponential growth.
+\end{thm}
+
+\begin{proof}
+Use $P,Q$ from Lemma~\ref{shiftmodel}. Lemma~\ref{lampshift} gives a
+closed shift-invariant subgroup $A\subset Q$ isomorphic with its
+shift to $(\mathbb Z_p)^{\mathbb Z}$. Its character group consists of the finitely supported functions
+from $\mathbb Z$ to $\mathbb Z_p$, with the dual shift. Taking $E=D$ and restricting functions on $P$ to $A$ gives the toral group
+\[
+ \widehat A\rtimes D=\left(\bigoplus_{n\in\mathbb Z}\mathbb Z_p\right)\rtimes\mathbb Z
+                       =\mathbb Z_p\wr\mathbb Z
+\]
+One lamp and the shift generate this group, so the compact matrix
+quotient obtained by lifting these generators suffices. For profinite $K$ we
+have $K=P$, and the torus already lies in $G$.
+
+Finally the shift can visit $n$ consecutive sites, at each site choosing
+whether to switch the lamp on. This gives $2^n$ distinct group elements
+of length at most $2n$. Lifts of the two generators have bounded length
+in $\mathcal R_G$, so the same exponential lower bound holds
+there after a linear change of radius. Amenability follows from that of
+$\mathbb Z$ by \cite[Corollary~3.7]{fmp}.
+\end{proof}
+
+For the full shift $K=(\mathbb Z_p)^{\mathbb Z}$ with trivial reverse action, $G$
+itself is the dual of $\mathbb Z_p\wr\mathbb Z$. Theorem~\ref{cycliclamps} shows
+that every compact matrix bicrossed product in the stated class contains
+this example at the level of tori of quotients.
+
+\section{Lattice actions, growth and characters}\label{seclattice}
+
+In two dimensions a group shift can be infinite while its only finitely
+supported configuration is the identity. For instance, Ledrappier's
+three-dot system \cite{ledrappier} consists of the arrays over $\mathbb F_2$
+satisfying
+\[
+ x_{i,j+1}=x_{i,j}+x_{i+1,j}
+\]
+For a finitely supported configuration, take a zero row below its
+support. The recurrence makes every row above it zero as well. Yet
+projection onto one horizontal row gives the full binary shift. Indeed,
+a predecessor of any two-sided row $a$ is obtained by fixing $b_0$ and
+solving $b_i+b_{i+1}=a_i$ in both directions. We first explain what replaces the finite-support
+argument for an arbitrary finite group alphabet.
+
+\begin{lem}\label{abelianshift}
+Let $D=\mathbb Z^r$ with $r\ge1$, let $F$ be a finite group and let $X$
+be an infinite closed shift-invariant subgroup of $F^D$. Some sublattice
+$nD$, $n\ge1$, preserves an infinite closed abelian subgroup of $X$.
+\end{lem}
+\begin{proof}
+We induct on $|F|$. By passing to the image at one coordinate we can
+suppose that all coordinate maps are onto $F$. If $F$ is abelian, take
+$X$ itself. If $1<N<F$ is normal, put $Y=X\cap N^D$. When $Y$ is
+infinite apply induction there. When $Y$ is finite the image of $X$ in
+$(F/N)^D$ is infinite. By induction that image contains an infinite
+abelian subgroup invariant under some $nD$ and closed in the image.
+Let $B$ be its preimage in $X$. All commutators in $B$ lie in $Y$.
+Choose an open normal subgroup $V$ of the profinite group $B$ with
+$V\cap Y=1$. Then $[V,B]\subset V\cap Y=1$, so $Z(B)$ is open in $B$.
+This center is infinite, closed, abelian and invariant under $nD$.
+
+It remains to treat a nonabelian simple $F$. Put two sites in the same
+class if their coordinate maps on $X$ have the same kernel. Within one
+class the coordinates determine one another by automorphisms of $F$.
+On distinct classes the values are independent. Indeed, on finitely many
+sites Scott's lemma \cite[p.~328]{scott} writes the subdirect product as a
+product of full diagonal subgroups. The diagonal blocks are exactly the
+sites with equal kernels. Compactness then permits arbitrary choices on
+one representative of each class. In particular a configuration can be set
+equal to the identity off any union of classes while keeping its values
+on that union.
+
+Let $L\le D$ stabilize the class of $0$. The classes are indexed by
+$D/L$, an infinite set since $X$ is infinite. Configurations supported
+on the class of $0$ form a copy of $F$. The action of $L$ on this copy
+has finite image in $Aut(F)$. Denote its kernel by $L_0$. Choose $n\ge1$ annihilating the torsion of the finitely
+generated abelian group $D/L_0$. Then $n(D/L_0)$ is torsion-free,
+and $L/L_0$ is finite. Hence $nD\cap L\subset L_0$.
+
+Take a nonidentity element in this supported copy of $F$. Two of its
+$nD$-translates either have disjoint supports or are equal, since a
+translation in $nD$ stabilizing the class acts trivially there. There
+are infinitely many supports because the image of $nD$ has finite
+index in $D/L$. The closure of the group generated by these translates
+is infinite, abelian and $nD$-invariant.
+\end{proof}
+
+\begin{lem}\label{latticelamps}
+Let $E$ be a free abelian group of finite positive rank. Suppose $M$ is
+an infinite discrete abelian group of bounded exponent, finitely generated
+as a $\mathbb Z[E]$-module. Then $M\rtimes E$ contains $\mathbb Z_p\wr\mathbb Z$
+for some prime $p$.
+\end{lem}
+\begin{proof}
+If each basis element of $E$ had finite orbits on each of a finite set
+of module generators, their full $E$-orbits would be finite by
+commutativity. These finitely many elements would generate $M$ as a
+group, making it finite. Thus some basis element $t$ has an infinite
+orbit. Among elements with infinite $t$-orbit take $a$ of least order.
+If its order is composite, take a prime $p$ dividing it. The orbit of
+$pa$ is finite by minimality, so $b=(t^k-1)a$ is killed by $p$ for some
+$k>0$. The orbit of $b$ is also finite by minimality. Its translates
+generate a finite $t$-invariant subgroup, modulo which $t^k$ fixes $a$.
+This would give $a$ a finite orbit. Hence $a$ has prime order $p$.
+
+A nonzero Laurent polynomial relation over $\mathbb F_p$ between the
+translates of $a$ would make their span a quotient of
+$\mathbb F_p[z,z^{-1}]/(f)$ with $f\ne0$, a finite group. Thus the
+translates are independent and $\langle a,t\rangle=\mathbb Z_p\wr\mathbb Z$.
+\end{proof}
+
+\begin{thm}\label{latticegrowth}
+Let $G$ be a compact matrix bicrossed product of $D=\mathbb Z^r$, $r\ge1$,
+and a compact group $K$ with infinitely many connected components.
+There exist a compact matrix quantum quotient $L$ of $G$, a finitely
+generated metabelian group $\Lambda$ and a prime $p$ such that
+\[
+ G\twoheadrightarrow L\supset\widehat\Lambda,\qquad
+ \mathbb Z_p\wr\mathbb Z\ \subset\ \Lambda
+\]
+In particular $\widehat G$ is amenable and the tori of its untwisted
+quotients detect its exponential growth.
+\end{thm}
+\begin{proof}
+
+Let $P=K/K^0$ and take $Q\subset P$ from Lemma~\ref{shiftmodel}.
+Identify $Q$ with a group shift in $F^D$ for a finite group $F$. Lemma~\ref{abelianshift} gives
+a closed infinite abelian $A\subset Q$ invariant under $E=nD$.
+Put $M=\widehat A$ and $\Lambda=M\rtimes E$. Since $E$ is characteristic
+in $D$, restriction to $A$ gives the coefficient maps of Section~\ref{seccomponent},
+\[
+ \mathcal R_G\ \supset\ \mathcal R_P\rtimes_{alg}E
+        \ \longrightarrow\ \mathbb C[\Lambda]
+\]
+
+The character group $M=\widehat A$ is infinite of exponent dividing the
+exponent of $F$. Take one site in each coset of $E$ in $D$. At each of
+these sites the image of $A$ is finite abelian. The characters of these
+finitely many images and all their $E$-translates separate the points of
+$A$, so they generate $M$ by Pontryagin duality. Thus $M$ is finitely
+generated over $\mathbb Z[E]$, and $\Lambda=M\rtimes E$ is finitely
+generated as a group. Lift a finite set of group generators to the middle algebra.
+The finitely many coefficient spaces containing the lifts generate the required compact matrix quotient $L$ on adjoining their adjoints.
+
+Lemma~\ref{latticelamps} gives the indicated subgroup of $\Lambda$.
+Words in its lamp and shift already give exponential growth in $\Lambda$
+and, by lifting generators, in $\mathcal R_G$. Coamenability
+follows from amenability of $D$ by \cite[Corollary~3.7]{fmp}.
+\end{proof}
+
+For an ordinary crossed product there is also a shorter route through a
+single lattice direction. It gives the lamplighter group itself as the
+discrete group tested by the quotient.
+
+\begin{cor}\label{ordinaryrow}
+Under the assumptions of Theorem~\ref{latticegrowth}, suppose $D$ acts
+on $K$ by automorphisms and the reverse action is trivial. There is a
+compact matrix quantum quotient of $G$ containing the dual of $\mathbb Z_p\wr\mathbb Z$
+for some prime $p$.
+\end{cor}
+\begin{proof}
+Here $Q=P=K/K^0$. Embed $P$ in $F^D$ by Lemma~\ref{shiftmodel} and let $Y_i$ be its
+image on the coordinate line $\mathbb Z e_i$. At least one $Y_i$ is
+infinite. Otherwise the shift on each finite $Y_i$ has a common period
+$m_i$ for its points. Translating the line shows that every configuration
+in $P$ is periodic in each direction with period $m_i$, leaving only
+finitely many choices in all.
+
+For this infinite $Y_i$, restriction to the line is an equivariant group
+surjection $P\to Y_i$ for $\mathbb Z e_i$. Pullback and the unitary $s_{e_i}$
+give the Hopf $*$-subalgebra
+$\mathcal R_{Y_i}\rtimes_{alg}\mathbb Z e_i\subset
+\mathcal R_G$. Its compact quantum group is compact matrix,
+since the functions at site zero and the shift generate the algebra.
+Lemma~\ref{lampshift} supplies an invariant copy of $(\mathbb Z_p)^{\mathbb Z}$
+in $Y_i$. Restricting to it gives the required torus.
+\end{proof}
+
+Theorem~\ref{latticegrowth} establishes Conjectures~\ref{twistamen}
+and~\ref{twistgrowth} for the stated lattice bicrossed products.
+Amenability is automatic by \cite[Corollary~3.7]{fmp}, and the
+exponential-growth group already occurs with the trivial twist. The
+inclusion $\mathbb Z_p\wr\mathbb Z\subset\Lambda$ here is an inclusion of
+discrete groups. Corollary~\ref{ordinaryrow} obtains the lamplighter
+dual itself as a torus in the ordinary crossed-product case.
+
+We turn to characters. Pullback from the compact factor puts
+$C(K)_{central}$ inside $C(G)_{central}$. If all tori kill a nonzero function in
+this subalgebra, then joint character detection fails. For lattice
+bicrossed products the converse also holds, even when the reverse
+action is nontrivial.
+
+\begin{thm}\label{bicrosscharacters}
+Let $G$ be a compact matrix bicrossed product of $D=\mathbb Z^r$,
+$r\ge1$, and a compact group $K$ with infinitely many connected
+components. The tori of $G$ are jointly faithful on $C(G)_{central}$ if and only
+if they are jointly faithful on $C(K)_{central}$.
+\end{thm}
+\begin{proof}
+Suppose the tori are jointly faithful on $C(K)_{central}$, and fix a
+nonzero $x\in C(G)_{central}$. We use right coefficients, writing an element
+of the algebraic span of the characters as
+\[
+ y=\sum_{n\in D}s_n f_n,\qquad f_n\in\mathcal R_K
+\]
+For any character $\chi$, the sum of the diagonal coefficients gives
+$\Delta(\chi)=\Delta^{op}(\chi)$, so the same equality holds for $y$.
+Comparing the right coefficients of bidegree $(n,s)$ in the coproduct
+formula of Section~\ref{secmatched}, we obtain, for $k,l\in K$,
+\[
+ 1_{\{\beta_k(n)=s\}} f_n(kl)
+   =1_{\{\beta_l(s)=n\}} f_s(lk)
+\]
+Take $l=1$ and $s=\beta_k(n)$. Since $\beta_1(s)=s$, a nonzero value
+$f_n(k)$ forces $\beta_k(n)=n$. Taking $n=s=0$ gives $f_0(kl)=f_0(lk)$,
+so $f_0$ is a class function. Both facts can also be read from the
+character formula in \cite[Theorem~3.1]{fw}.
+
+Let $E:C(K)\rtimes D\to C(K)$ take the coefficient at $0$. Since $D$
+is amenable, the full and reduced crossed products agree and $E$ is
+faithful. On the algebraic span just considered, $E$ takes values in
+the class functions. By continuity the same holds on $C(G)_{central}$, which
+is a $C^*$-algebra. In particular $E(x^*x)$ is a nonzero positive
+class function. Choose a torus restriction
+$\pi:C(G)\twoheadrightarrow C^*(\Gamma)$ on which it survives.
+The image of $C(K)$ is $C(A)$ for a closed abelian subgroup $A\subset K$,
+since restriction is a Hopf map into a cocommutative algebra.
+Covariance makes $A$ invariant under each $\alpha_n$. We may therefore
+choose $a\in A$ with $E(x^*x)(a)>0$.
+
+By Lemma~\ref{shiftmodel}, $\sigma=\beta_a$ is a lattice automorphism
+of finite order $m$, the image of $\beta$ is finite, and
+$\beta_{\alpha_n(b)}=\beta_b$. Put
+\[
+ A_0=\{b\in A:\beta_b\in\langle\sigma\rangle\},\qquad
+ N=1+\sigma+\cdots+\sigma^{m-1}\ \in End(D)
+\]
+Since the image of $\beta$ is finite, $A_0$ is open in $A$. It contains
+$a$ and is invariant under
+the lattice action. We have $N\beta_b=N$ for every $b\in A_0$, and
+$Nn=mn$ on the subgroup fixed by $\sigma$. In particular $N$ is
+injective on the lattice degrees that can have a nonzero coefficient
+at $a$.
+
+We first restrict the chosen torus over $A_0$. The projection
+$p=1_{A_0}$ commutes with $C(A)$ and with every $\pi(s_n)$ by
+invariance. These generate $C^*(\Gamma)$, so $p$ is central.
+The Hopf inclusion $C(A)=C^*(\widehat A)\subset C^*(\Gamma)$ identifies
+$\widehat A$ with a subgroup of $\Gamma$. Writing $F=A_0^\perp$ for the
+finite subgroup of characters of $A$ trivial on $A_0$, we have
+\[
+ p=\frac1{|F|}\sum_{h\in F}h
+\]
+Centrality and linear independence of group elements give
+$gFg^{-1}=F$ for every $g\in\Gamma$. The corner $pC^*(\Gamma)$ is
+therefore the full group algebra of $\Gamma/F$. Indeed the unitary
+representations on which $p$ acts as the identity are precisely those
+trivial on $F$. Composing $\pi$ with the group quotient gives a torus
+restriction $\pi_0$ with $\pi_0(C(K))=C(A_0)$, since compression on
+$C(A)$ is restriction to $A_0$.
+
+Write $v_n=\pi_0(s_n)$ and let $u_j$ denote the canonical unitaries of
+$C^*(D)$. The following assignments give a map $\rho$ into
+$C^*((\Gamma/F)\times D)$ by covariance.
+\[
+ f\longmapsto\pi_0(f)\otimes1,\qquad
+ s_n\longmapsto v_n\otimes u_{Nn}
+\]
+It intertwines coproducts on $C(K)$. In the coproduct of $s_n$, the
+summand with second degree $s$ has first-leg indicator
+$1_{\{b:\beta_b(n)=s\}}$. After applying $\pi_0$ this indicator can
+survive only if $s=\beta_b(n)$ for some $b\in A_0$. We then have
+$Ns=Nn$, so the two added group factors in this summand are both
+$u_{Nn}$. This proves compatibility with the coproduct on $s_n$ as well.
+The image of the polynomial Hopf algebra is a Hopf $*$-subalgebra of
+$\mathbb C[(\Gamma/F)\times D]$, hence is the group algebra of a
+subgroup. Passing to its full completion gives a torus of $G$ through
+which $\rho$ factors.
+
+Finally extend evaluation at $a$ on $C(A_0)$ to a state of
+$C^*(\Gamma/F)$. In its cyclic representation let $\xi$ be the unit
+vector inducing this state. For $f\in C(K)$,
+$\pi_0(f)\xi=f(a)\xi$, by applying the state to $|f-f(a)|^2$.
+Use the regular representation on $\ell^2(D)$ for the other group
+factor. Although $v_n$ need not be group-like, it is unitary. With the
+right coefficients of $y$ we obtain
+\[
+ \rho(y)(\xi\otimes\delta_0)
+       =\sum_n f_n(a)\,v_n\xi\otimes\delta_{Nn}
+\]
+The nonzero summands are orthogonal, since their degrees are fixed
+by $\sigma$ and $N$ is injective there. We obtain
+\[
+ \|\rho(y)(\xi\otimes\delta_0)\|^2
+       =\sum_n |f_n(a)|^2=E(y^*y)(a)
+\]
+The last equality follows by extracting degree zero in the product
+using the right coefficients. Approximate $x$ in norm by such $y$.
+Both sides are continuous, so the squared norm at $x$ equals
+$E(x^*x)(a)>0$. The torus just constructed detects $x$. The reverse
+implication follows from $C(K)_{central}\subset C(G)_{central}$.
+\end{proof}
+
+\section{Character detection and the quantum center}\label{seccenter}
+
+The compact factor in Theorem~\ref{bicrosscharacters} belongs to the
+given bicrossed-product presentation. To obtain a character test defined
+for $G$ alone, consider its quantum center $Z(G)$. We recall the
+description by the chain group \cite{chirvasitu,kss}. Let $\Gamma$ be
+the group with one generator $g_u$ for each $u\in Irr(G)$ and relations
+\[
+ g_w=g_u g_v \qquad\text{whenever } w\in u\otimes v
+\]
+In particular $g_1=e$ and $g_{\bar u}=g_u^{-1}$. The group $\Gamma$
+grades the polynomial Hopf algebra by assigning degree $g_u$ to every
+matrix coefficient $u_{ij}$. Restriction to the quantum center is
+given on matrix coefficients by $u_{ij}\mapsto\delta_{ij}g_u$, so
+$Z(G)=\widehat\Gamma$ \cite[Remark~2.7]{kss}. An irreducible
+representation descends to $G/Z(G)$ precisely when its degree is $e$.
+Taking the norm closure of the pulled-back characters in $C(G)$ gives
+\[
+ C(G/Z(G))_{central}=\overline{span}\{\chi_u:u\in Irr(G),\ g_u=e\}
+\]
+Throughout this section restrictions on this subalgebra are taken to
+the tori of $G$.
+
+Write $I$ for the common kernel of the torus restrictions on $C(G)_{central}$.
+Define $P_e$ on the span of the characters by keeping only the terms
+of degree $e$. To see its extension to the norm closure, let $U_g$ be
+the canonical unitary in $C^*(\Gamma)$ and define the grading map by
+\[
+ \delta(u_{ij})=u_{ij}\otimes U_{g_u},\qquad
+ P_e=(id\otimes\tau)\delta
+\]
+Here $\tau(U_g)$ is one for $g=e$ and zero otherwise. The map $\delta$
+is the coproduct followed by restriction of the second factor to the
+center, with values in the spatial tensor product
+$C(G)\otimes C^*(\Gamma)$. Slicing by the trivial representation
+$U_g\mapsto1$ gives the identity, so $\delta$ is injective. The
+slice defining $P_e$ is positive and contractive. On $C(G)_{central}$ it is a
+conditional expectation onto $C(G/Z(G))_{central}$.
+
+\begin{prop}\label{neutralprojection}
+For any compact matrix quantum group $G$ of Kac type, $P_e(I)$ is
+contained in $I$. If the chain group is amenable, every nonzero
+$x\in I$ gives a nonzero element $P_e(x^*x)$ in $I\cap C(G/Z(G))_{central}$.
+The same conclusion holds for any nonzero finite linear combination
+of irreducible characters in $I$, for an arbitrary chain group.
+\end{prop}
+\begin{proof}
+Fix a torus restriction $\pi:C(G)\twoheadrightarrow C^*(\Lambda)$.
+For $a$ homogeneous of degree $g$, the assignment
+\[
+ a\longmapsto \pi(a)\otimes U_g\ \in\ \mathbb C[\Lambda\times\Gamma]
+\]
+on the polynomial algebra preserves multiplication and the involution.
+It also preserves coproducts, since both legs of the coproduct of a
+matrix coefficient of an irreducible of degree $g$ have degree $g$.
+The image is a Hopf $*$-subalgebra of a group algebra, hence the group
+algebra of a subgroup. The resulting map to its full completion is a
+torus restriction of $G$. Its composition with the natural map to
+$C^*(\Lambda)\otimes C^*(\Gamma)$ agrees with
+$(\pi\otimes id)\delta$ on the polynomial algebra and
+therefore on $C(G)$. For $x\in I$ the enlarged torus kills $x$.
+Slicing gives $\pi(P_e x)=0$. This holds for every $\pi$.
+
+When $\Gamma$ is amenable, the regular trace $\tau$ is faithful on
+$C^*(\Gamma)$, so $id\otimes\tau$ is faithful on positive
+elements of the spatial tensor product. Injectivity of $\delta$ now
+gives $P_e(x^*x)\ne0$ for $x\ne0$. For a finite sum $x=\sum_g x_g$
+of homogeneous characters or their linear combinations we have directly
+\[
+ P_e(x^*x)=\sum_g x_g^*x_g
+\]
+This is nonzero as soon as some $x_g$ is nonzero. In both cases $x^*x$
+belongs to $I$, and the first assertion finishes the proof.
+\end{proof}
+
+\begin{cor}\label{classicalneutral}
+Let $G\twoheadrightarrow K$ be a quantum quotient with $K$ a classical compact group. Whenever the
+tori of $G$ kill a nonzero $f\in C(K)_{central}$, they also kill a nonzero
+element of $C(G/Z(G))_{central}$. In particular New conjecture~\ref{newchar} holds
+for both crossed-product classes in Theorem~\ref{introchar}.
+\end{cor}
+\begin{proof}
+Regard representations of $K$ as representations of $G$ by pullback.
+For $u,v\in Irr(K)$ the tensor products $u\otimes v$ and $v\otimes u$
+are isomorphic. Any common irreducible constituent therefore gives
+$g_u g_v=g_v g_u$ in the chain group of $G$. The subgroup $A$ generated
+by the degrees coming from $K$ is abelian. Consequently
+\[
+ \delta(C(K)_{central})\ \subset\ C(K)_{central}\otimes C^*(A)
+\]
+Here $C^*(A)$ embeds in $C^*(\Gamma)$, and the restriction of $\tau$
+to it is the faithful regular trace of the abelian group $A$.
+Thus $P_e(f^*f)$ is nonzero. Proposition~\ref{neutralprojection} shows
+that it belongs to $I\cap C(G/Z(G))_{central}$.
+
+For an ordinary crossed product with amenable discrete factor,
+Theorem~\ref{classcriterion} and its proof give a nonzero invisible
+class function on $K$ whenever joint detection on $C(G)_{central}$ fails. For a
+lattice bicrossed product with infinitely many compact-factor components,
+Theorem~\ref{bicrosscharacters} gives precisely that implication. Applying
+the first assertion proves the character conjecture in both cases.
+\end{proof}
+
+A counterexample to New conjecture~\ref{newchar} would therefore have
+a nonamenable chain group. In such an example every nonzero character polynomial would survive on
+some torus, but a nonzero norm limit of character polynomials would
+vanish on all of them. When $Z(G)$ is trivial, $G/Z(G)=G$ and the
+conjecture holds immediately.
+
+\section{Examples and partition calculations}\label{sectests}
+
+An old torus is still available for the two analytic tests. For
+characters the verification concerns the norm closure in $C(G)_{central}$.
+
+\begin{prop}\label{transfer}
+Within the compact matrix Kac setting, each verification of Old
+conjecture~\ref{oldamen} or~\ref{oldgrowth} gives a verification of
+New conjecture~\ref{newamen} or~\ref{newgrowth}, respectively.
+Joint detection of $C(G)_{central}$ implies New conjecture~\ref{newchar}.
+This last conjecture also holds whenever $\widehat G$ is amenable or
+$G$ has an irreducible fundamental representation.
+\end{prop}
+\begin{proof}
+Every old torus occurs in the new family by taking the identity
+quotient and the trivial twist. Thus a witness to failure of either
+analytic property still works, while Proposition~\ref{twistnecessary}
+proves the forward implications. Joint detection of $C(G)_{central}$ is the
+conclusion of New conjecture~\ref{newchar}, with or without connectedness.
+
+For the two other character assertions, let $\Gamma$ be the chain group.
+Its dual is the central torus $Z(G)\subset G$, so amenability of
+$\widehat G$ gives amenability of $\Gamma$ by
+Proposition~\ref{twistnecessary}. If a fundamental representation $u$
+is irreducible, every irreducible occurs in a tensor word in $u,\bar u$.
+Its degree is thus a power of $g_u$, and $\Gamma$ is cyclic.
+In both cases apply Proposition~\ref{neutralprojection}.
+\end{proof}
+
+In particular, all three new conjectures hold for the classical compact
+matrix groups and group duals of \cite[Proposition~4.1]{bp}. On a
+classical group each element belongs to the closure of the cyclic
+subgroup it generates, so restrictions even separate all continuous
+functions. A group dual is its own torus.
+
+All three also hold for every compact quantum subgroup of $O_N^*$.
+Indeed, polynomial growth of the dual of $O_N^*$ \cite[Section~9]{halforth}
+passes to the dual of each such subgroup \cite[Proposition~4.1]{dpr}
+and implies amenability \cite[Theorem~4.6]{dpr}.
+Propositions~\ref{twistnecessary} and~\ref{transfer} now apply.
+This covers the half-classical examples of \cite[Theorem~5.5]{bp},
+including $[H]$ from the crossed-product construction of \cite{halfhopf},
+and works for the new tests without a connectedness assumption.
+
+\topic{Orthogonal easy quantum groups}
+For New conjecture~\ref{newchar}, even the partitions describing the
+higher tensor powers are unnecessary in the following case.
+
+\begin{thm}\label{easycharacters}
+If $S_N\subset G\subset O_N^+$ in the permutation representation,
+then New conjecture~\ref{newchar} holds. In particular it holds for every
+orthogonal easy quantum group.
+\end{thm}
+\begin{proof}
+For $N\ge2$, the commutant of $S_N$ on $\mathbb C^N$ is spanned by the
+identity and the projection onto the constant vectors. Indeed a commuting
+matrix has one common diagonal entry and one common off-diagonal entry.
+The commutant of the fundamental $u$ of $G$ is a unital $*$-subalgebra
+of this two-dimensional algebra. If it consists of scalars, $u$ is
+irreducible and Proposition~\ref{transfer} applies.
+
+Otherwise $u$ has two irreducible summands on the constants and their
+orthogonal complement. Both summands are self-conjugate, since their
+projections are real and $u$ is orthogonal. Their degrees generate the
+chain group and square to the identity. This group is therefore a
+quotient of the amenable group $\mathbb Z_2*\mathbb Z_2$. Apply
+Proposition~\ref{neutralprojection}. The case $N=1$ is immediate.
+For an orthogonal easy quantum group the inclusion of $S_N$ follows
+because every partition map intertwines the permutation action
+\cite{liberation}.
+\end{proof}
+
+We can now account for the four free families of \cite[Theorem~4.4]{bp}.
+The preceding theorem gives New conjecture~\ref{newchar} for $O_N^+$,
+$S_N^+$ and $H_N^+$, and the fundamental representation of $U_N^+$
+is irreducible already on $U_N$. For $N\ge3$ the standard diagonal
+groups of $O_N^+,H_N^+$ are $\mathbb Z_2^{*N}$, while that of $U_N^+$
+is $F_N$. For $S_N^+$ with $N\ge5$, a pair and a triple of points
+give $\mathbb Z_2*\mathbb Z_3$. These groups witness nonamenability
+and exponential growth in the indicated ranks, as does $F_2$ for
+$U_2^+$. All remaining ranks have polynomial growth and amenable dual
+\cite[Theorem~4.4]{bp}. Thus the two analytic verifications transfer
+through Proposition~\ref{transfer}. For the character verification
+above, no passage from polynomial injectivity to norm injectivity is
+needed. The same transfer applies wherever the diagonal groups of the
+other orthogonal easy families in \cite[Section~6]{bp} are known to be
+nonamenable. Theorem~\ref{easycharacters} supplies the character
+assertion for these families as well.
+
+\topic{Torus relations from partitions}
+For an orthogonal easy quantum group and a real orthogonal basis
+change $Q$, take a partition map $T_p$ between tensor powers of
+lengths $k,l$. Set
+\[
+ T_p^Q=Q^{\otimes l}T_p(Q^t)^{\otimes k}
+\]
+On the diagonal torus the intertwiner equation reads
+\[
+ (T_p^Q)_{j,i}\,g_{i_1}\cdots g_{i_k}
+ =g_{j_1}\cdots g_{j_l}\,(T_p^Q)_{j,i}
+\]
+Whenever the scalar coefficient is nonzero, we can cancel it and identify
+the two words. It suffices to impose these relations on any family
+generating the tensor category
+\cite[Section~6]{bp}. For unitary categories one also uses the conjugate
+basis on conjugate tensor factors and inverse letters there. For
+New conjectures~\ref{newamen} and~\ref{newgrowth}, a compact matrix
+quantum quotient selects a full tensor subcategory closed under
+subobjects, conjugates and finite sums. A dimension-preserving unitary
+fiber functor realizes the allowed twist \cite{bdv}. One may then use the
+same coefficient rule on the resulting concrete intertwiners. A single
+presentation exhibiting a group without the required property suffices.
+
+Here is a small example where the basis matters. Write $D_\infty=
+\mathbb Z_2*\mathbb Z_2$ and take
+\[
+ Q=\begin{pmatrix}a&-b\\ b&a\end{pmatrix},\qquad a^2+b^2=1
+\]
+\begin{prop}\label{ranktwotori}
+For $H_2^+$ the three possibilities for $\Gamma_Q$ are
+\[
+ \Gamma_Q\simeq
+ \begin{cases}
+ D_\infty & ab=0\cr
+ \mathbb Z_2\times\mathbb Z_2 & |a|=|b|\cr
+ \mathbb Z_2 & ab\ne0,\ |a|\ne|b|
+ \end{cases}
+\]
+The same list covers all real orthogonal bases up to row signs.
+\end{prop}
+\begin{proof}
+The pair partition makes the two generators $g,h$ involutions.
+The four-block fixes $e_1^{\otimes4}+e_2^{\otimes4}$.
+These two tensors present the orthogonal cubic relations
+\cite{liberation,reflection}. Bending two legs of the four-block gives the projection onto the span of $e_i\otimes e_i$. Intertwining
+this projection with $u^{\otimes2}$ says exactly that distinct entries
+in any row or column have product zero.
+
+If $ab=0$ the only supported four-letter words are $g^4,h^4$.
+Otherwise the coefficient of $ghgh$ is $2a^2b^2$, so the two
+involutions commute. A word with three copies of one letter and one
+of the other has coefficient $\pm ab(a^2-b^2)$. When this is zero
+the remaining relations have even multiplicity of each letter, and
+commuting involutions satisfy them all. When it is nonzero they force
+$g=h$, and one involution satisfies every relation. Row signs do
+not change the support of either tensor.
+\end{proof}
+
+The original basis gives $D_\infty$. The normalized Fourier matrix gives
+\[
+ Q=\frac{1}{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix},\qquad
+ \Gamma_Q\simeq\mathbb Z_2\times\mathbb Z_2
+\]
+In the Fourier basis we can check commutativity directly. Put $w=gh$.
+Since $g$ and $h$ are involutions, we have
+\[
+ u_{11}=\frac{g+h}{2},\qquad u_{11}^2=\frac{2+w+w^{-1}}4
+\]
+The cubic relations make $u_{11}^2$ a projection. Squaring the second
+expression and equating it to itself gives $w^2+w^{-2}=2$.
+Linear independence in the group algebra forces $w^2=1$, so $g$ and $h$
+commute.
+This corrects the Fourier-basis calculation in the arXiv version of
+\cite[proof of Theorem~4.4]{bp}.
+
+Computing the two tensor supports over
+the integers, \texttt{tori\_partitions.py} finds 4, 4 and 632 primitive
+signed pairs in the respective cases for $\max(|a|,|b|)\le16$
+before normalization.
+
+\begin{prop}\label{reflectiontest}
+New conjectures~\ref{newchar}--\ref{newgrowth} hold for the free
+complex reflection groups $H_N^{s+}$, for $N\ge2$ and $s\ge3$.
+Their standard diagonal group is the free product of $N$ copies of
+$\mathbb Z_s$, and their chain group is $\mathbb Z_s$.
+\end{prop}
+\begin{proof}
+In the defining presentation of \cite{reflection}, the entries of $u$
+are normal partial isometries satisfying $u_{ij}^{s}=u_{ij}u_{ij}^*$.
+Setting all off-diagonal entries to zero leaves arbitrary unitaries
+$g_i$ with $g_i^s=1$. Conversely any such family gives a diagonal
+solution of all the relations. In the partition description a block of
+$s$ equal colors imposes $g_i^s=1$ in this basis. The resulting group contains $\mathbb Z_s*\mathbb Z_s$. The kernel of
+the map from their free product onto $\mathbb Z_s^2$ acts freely on the
+free product tree. The quotient graph is the complete bipartite graph on $s+s$ vertices.
+Counting its edges and vertices gives the free rank of the kernel
+\[
+ s^2-2s+1=(s-1)^2\ge2
+\] This one
+torus therefore verifies both analytic tests.
+
+The classical diagonal phase matrices and the permutation matrices act
+irreducibly together, so $u$ is irreducible. Its degree generates the
+chain group. The tensor $\sum_i e_i^{\otimes s}$ is fixed by the block
+of size $s$, so $g_u^s=1$. Scalar matrices of order $s$ give a central
+subgroup on which $u$ has the defining degree of order $s$. This proves
+the claimed equality, and Proposition~\ref{transfer} proves the
+character assertion.
+\end{proof}
+
+The script counts words by syllable length, using the generators and their
+inverses. For $\mathbb Z_3*\mathbb Z_3$ it finds the following ball volumes
+at radii $0,\ldots,6$
+\[
+ 1,\ 5,\ 13,\ 29,\ 61,\ 125,\ 253
+\]
+At the same radii in $D_\infty$ the volumes are $1,3,5,7,9,11,13$.
+
+\topic{A test with nonamenable chain group}
+The following dilation argument also gives the full norm in the
+single-factor calculation of \cite[Theorem~4.4]{bp}.
+
+\begin{thm}\label{freeunitarytest}
+Let $C(G)$ be the unital full free product of the coefficient
+algebras of $U_{N_1}^+,\ldots,U_{N_r}^+$ with their usual coproducts,
+where $r\ge1$ and $N_i\ge2$. The diagonal torus of the block
+fundamental representation is isometric on $C(G)_{central}$. All three new
+conjectures hold, and the chain group is $F_r$.
+\end{thm}
+\begin{proof}
+Write $\chi_i$ for the fundamental character of the $i$-th factor.
+The fusion rules for a single factor \cite[Theorem~6.20]{qg} and the
+alternating-word description of the free product irreducibles
+\cite[Theorem~3.10]{wangfree} give $C(G)_{central}=C^*(\chi_1,\ldots,\chi_r)$.
+Let $g_{ij}$ be the $j$th diagonal generator of the $i$th factor. The
+restriction of its character is
+\[
+ \pi(\chi_i)=g_{i1}+\cdots+g_{iN_i}
+\]
+All these generators are free, both within each factor and across
+different factors.
+
+Fix a representation of $C(G)$ on a Hilbert space $E$. The operators
+$T_i=\chi_i/N_i$ in this representation are contractions. For each
+$i$ form the unitary on $E\oplus E$
+\[
+ V_i=\begin{pmatrix}
+ T_i&\sqrt{1-T_iT_i^*}\\
+ \sqrt{1-T_i^*T_i}&-T_i^*
+ \end{pmatrix}
+\]
+Summing the conjugates over the $N_i$-th roots of unity cancels the
+off-diagonal entries, giving
+\[
+ D_z=\begin{pmatrix}1&0\\0&z\end{pmatrix},\qquad
+ \sum_{z^{N_i}=1}D_zV_iD_z^*
+ =N_i\begin{pmatrix}T_i&0\\0&-T_i^*\end{pmatrix}
+\]
+Assign these unitaries $D_zV_iD_z^*$ to
+the generators of the $i$-th block. Freeness gives a representation of
+the full toral group algebra on $E\oplus E$. The first summand reduces
+all the character images and recovers the original $\chi_i$
+simultaneously. Taking the supremum over representations proves equality
+of norms for every $*$-polynomial in the characters and hence on $C(G)_{central}$.
+
+The toral group $F_{\sum_i N_i}$ witnesses nonamenability and exponential
+growth. The $r$ fundamental degrees generate the chain group and map to
+the free generators $z_i$ of $F_r$ under $u_i\mapsto z_i I_{N_i}$.
+This quotient is central, as one checks on the coefficients of $u_i$.
+Thus the chain group is $F_r$.
+\end{proof}
+
+
+\topic{Twisting the free product}
+The preceding isometry uses a particular torus. To follow that torus
+under a twist we keep track of the bases of the fundamental blocks.
+
+\begin{cor}\label{freetwist}
+For the free product $G$ of Theorem~\ref{freeunitarytest}, every unitary
+dual $2$-cocycle is a coboundary. In every twist, the diagonal torus of
+the corresponding fundamental blocks has group $F_{N_1+\cdots+N_r}$,
+and restriction to this torus is isometric on the full character algebra.
+\end{cor}
+\begin{proof}
+The cocycle defines a dimension-preserving unitary fiber functor on
+$Rep(G)$. On $U_{N_i}^+$ such a functor is classified
+by an invertible matrix $M$ of size $N_i$, up to left and right
+unitaries \cite[Theorem~6.2 and Remark~6.5]{bdv}. For $P=M^*M$ the two
+trace conditions give
+\[
+ Tr(P)=Tr(P^{-1})=N_i,\qquad Tr(P+P^{-1}-2I)=0
+\]
+Each eigenvalue $\lambda>0$ of $P$ contributes
+$\lambda+\lambda^{-1}-2=(\lambda-1)^2/\lambda$ to the last trace.
+All contributions are nonnegative, so every eigenvalue equals one and $P=I$.
+It follows that $M$ is equivalent to the identity and the restricted
+functor is unitarily monoidally isomorphic to the forgetful functor.
+
+The representation category of the free product has the universal
+property of the free product of the factor categories
+\cite[Proposition~5.1]{valvekens}. Hence the factor isomorphisms
+extend to a unitary monoidal isomorphism on all of $Rep(G)$.
+On a tensor word its value is the tensor product of the factor
+isomorphisms, composed with the tensor structure maps of the functors.
+By \cite[Proposition~4.5]{bdv} this says precisely that the cocycle
+is a coboundary.
+
+The induced Hopf $*$-isomorphism matches each fundamental block up to
+unitary change of basis. Any such changes can be absorbed independently
+by automorphisms of the original free product, since
+$u_i\mapsto W_i u_i W_i^*$ preserves biunitarity and has an inverse.
+The isomorphism then identifies the corresponding diagonal quotients
+and preserves character norms by Theorem~\ref{freeunitarytest}.
+\end{proof}
+
+For an explicit twist take two $U_2^+$ factors, with fundamental
+matrices $u,v$ and toral letters $g_1,g_2,h_1,h_2$, respectively.
+Define $p:F_4\to A=\mathbb Z_2^2$ on the generators by
+\[
+ p(g_1)=(1,0),\qquad p(h_1)=(0,1),\qquad p(g_2)=p(h_2)=0
+\]
+On $A$ take the bicharacter $\sigma(x,y)=(-1)^{x_1y_2}$. Its values on
+the two basis elements depend on their order. Since every coboundary on
+$A$ is symmetric, $\sigma$ represents a nontrivial class. Composing
+with $p$ gives a cocycle on $F_4$. The diagonal restriction
+$\mathcal R_G\to\mathbb C[F_4]$ then gives the cocycle on
+the dual of $G$.
+
+For coefficients $a,b$ of respective left and right $A$-weights
+$(x,x')$ and $(y,y')$, the twisted product is
+\[
+ a\star b=\sigma(x,y)\overline{\sigma(x',y')}\,ab
+\]
+For example, the order of the two coefficients affects the sign
+\[
+ u_{12}\star v_{11}=-u_{12}v_{11},\qquad
+ v_{11}\star u_{12}=v_{11}u_{12}
+\]
+For a word in the free generators and their inverses put
+\[
+ b(\ell_1\cdots\ell_k)=
+ (-1)^{\displaystyle\sum_{i<j}p(\ell_i)_1p(\ell_j)_2}
+\]
+An inverse pair contributes zero internally, since a letter has weight
+on at most one coordinate. Its terms with every other letter cancel.
+Thus $b$ is defined on $F_4$, and splitting the sum between words gives
+\[
+ b(st)=b(s)b(t)\sigma(p(s),p(t))
+\]
+For a coefficient of left and right $F_4$-degrees $(s,t)$, multiplication
+by $b(s)\overline{b(t)}$ untwists the product. This follows by
+applying the preceding identity to the left and right degrees separately. It fixes the
+entries of $u$ and $v$, since $b$ is one on single letters.
+In $\mathbb C[F_4]$, a group element has equal left and right degrees.
+Hence diagonal restriction kills coefficients with $s\ne t$. For
+$s=t$ the untwisting sign is one. Thus in this example the original restriction
+map itself survives on the common polynomial coalgebra, with
+\[
+ \chi_u\longmapsto g_1+g_2,\qquad \chi_v\longmapsto h_1+h_2
+\]
+The script \texttt{tori\_twists.py} checks this formula on all 69,905
+formal coefficient words through length four, including adjoints and
+the empty word. All 341 character $*$-words through that length give
+identical toral expansions. Corollary~\ref{freetwist} gives the isometry
+on the norm closure.
+
+\phantomsection\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{99}
+\small\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+\bibitem{qg} T. Banica, Introduction to quantum groups, Springer (2023).
+\bibitem{generic} T. Banica, Symmetries of a generic coaction,
+\emph{Math. Ann.} \textbf{314} (1999), 763--780.
+\bibitem{bbd} T. Banica, J. Bhowmick and K. De Commer, Quantum isometries and group dual subgroups, \emph{Ann. Math. Blaise Pascal} \textbf{19} (2012), 1--27.
+\bibitem{bp} T. Banica and I. Patri, Maximal torus theory for compact quantum groups,
+\emph{Illinois J. Math.} \textbf{61} (2017), 151--170.
+\bibitem{liberation} T. Banica and R. Speicher, Liberation of orthogonal Lie groups, \emph{Adv. Math.} \textbf{222} (2009), 1461--1501.
+\bibitem{reflection} T. Banica and R. Vergnioux, Fusion rules for quantum reflection groups, \emph{J. Noncommut. Geom.} \textbf{3} (2009), 327--359.
+\bibitem{halforth} T. Banica and R. Vergnioux, Invariants of the half-liberated orthogonal group, \emph{Ann. Inst. Fourier} \textbf{60} (2010), 2137--2164.
+\bibitem{bdv} J. Bichon, A. De Rijdt and S. Vaes, Ergodic coactions with large multiplicity and monoidal equivalence of quantum groups, \emph{Comm. Math. Phys.} \textbf{262} (2006), 703--728.
+\bibitem{halfhopf} J. Bichon and M. Dubois-Violette, Half-commutative orthogonal Hopf algebras, \emph{Pacific J. Math.} \textbf{263} (2013), 13--28.
+\bibitem{behy} M. Brannan, F. Elzinga, S.J. Harris and M. Yamashita, Crossed product equivalence of quantum automorphism groups of finite dimensional $C^*$-algebras, \emph{Int. Math. Res. Not.} \textbf{2023} (2023), 17749--17787.
+\bibitem{btd} T. Br\"ocker and T. tom Dieck, Representations of compact Lie groups, Graduate Texts in Mathematics \textbf{98}, Springer (1985).
+\bibitem{chirvasitu} A. Chirvasitu, Centers, cocenters and simple quantum groups,
+\emph{J. Pure Appl. Algebra} \textbf{218} (2014), 1418--1430.
+\bibitem{dpr} A. D'Andrea, C. Pinzari and S. Rossi, Polynomial growth of discrete quantum groups, topological dimension of the dual and $*$-regularity of the Fourier algebra, \emph{Ann. Inst. Fourier} \textbf{67} (2017), 2003--2027.
+\bibitem{fmp} P. Fima, K. Mukherjee and I. Patri, On compact bicrossed products,
+\emph{J. Noncommut. Geom.} \textbf{11} (2017), 1521--1591.
+\bibitem{fw} P. Fima and H. Wang, Rapid decay and polynomial growth for bicrossed products, \emph{J. Noncommut. Geom.} \textbf{15} (2021), 1105--1128.
+\bibitem{goswami} D. Goswami, A note on outer quantum automorphisms of finite dimensional von Neumann algebras, \emph{Indian J. Pure Appl. Math.} \textbf{55} (2024), 922--930.
+\bibitem{kss} P. Kasprzak, A. Skalski and P.M. So{\l}tan, The canonical central exact sequence for locally compact quantum groups,
+\emph{Math. Nachr.} \textbf{290} (2017), 1303--1316.
+\bibitem{ks} B. Kitchens and K. Schmidt, Automorphisms of compact groups, \emph{Ergodic Theory Dynam. Systems} \textbf{9} (1989), 691--735.
+\bibitem{kyed} D. Kyed, $L^2$-Betti numbers of coamenable quantum groups, \emph{M\"unster J. Math.} \textbf{1} (2008), 143--180.
+\bibitem{ledrappier} F. Ledrappier, Un champ markovien peut \^etre d'entropie nulle et m\'elangeant, \emph{C. R. Acad. Sci. Paris S\'er. A} \textbf{287} (1978), 561--563.
+\bibitem{mmv} D.W. Morris, J. Morris and G. Verret, Isomorphisms of Cayley graphs on nilpotent groups, \emph{New York J. Math.} \textbf{22} (2016), 453--467.
+\bibitem{mrozinski} C. Mrozinski, Quantum automorphism groups and $SO(3)$-deformations, \emph{J. Pure Appl. Algebra} \textbf{219} (2015), 1--32.
+\bibitem{scott} L.L. Scott, Representations in characteristic $p$, \emph{Proc. Sympos. Pure Math.} \textbf{37} (1980), 319--331.
+\bibitem{valvekens} M. Valvekens, Some remarks on free products of rigid $C^*$-2-categories, arXiv:2008.12994 (2020).
+\bibitem{wangfree} S. Wang, Free products of compact quantum groups, \emph{Comm. Math. Phys.} \textbf{167} (1995), 671--692.
+\bibitem{wang} S. Wang, Tensor products and crossed products of compact quantum groups,
+\emph{Proc. London Math. Soc.} \textbf{71} (1995), 695--720.
+\bibitem{simple} S. Wang, Simple compact quantum groups I, \emph{J. Funct. Anal.} \textbf{256} (2009), 3313--3341.
+\bibitem{wcmp} S.L. Woronowicz, Compact matrix pseudogroups, \emph{Comm. Math. Phys.} \textbf{111} (1987), 613--665.
+\bibitem{wtk} S.L. Woronowicz, Tannaka--Krein duality for compact matrix pseudogroups. Twisted $SU(N)$ groups, \emph{Invent. Math.} \textbf{93} (1988), 35--76.
+\end{thebibliography}
+\end{document}
